@@ -13,7 +13,7 @@ An end‑to‑end Optical Mark Recognition (OMR) system built with Flask + OpenC
 ## 🖼️ Home Page (Preview)
 
 <p align="center">
-  <img src=="https://github.com/wolfieexd/ScoreVision/blob/main/Screenshot.png?raw=true" alt="Picture1" />
+  <img src="https://github.com/wolfieexd/ScoreVision/blob/main/Screenshot.png?raw=true" alt="Picture1" />
 </p>
 
 ---
