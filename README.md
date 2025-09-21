@@ -1,4 +1,4 @@
-# 📝 OMR Evaluvator — AI-Powered OMR Scoring System
+# 📝 ScoreVision — AI-Powered OMR Scoring System
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/downloads/)
 [![OpenCV](https://img.shields.io/badge/OpenCV-4.x-red.svg)](https://opencv.org/)
@@ -188,7 +188,7 @@ Python • OpenCV • NumPy • SciPy • scikit‑image • Flask • pandas �
 
 ## 👤 Maintainers
 
-- Project Maintainer: You/Your Team
+- Project Maintainers: Zero FOMO Team
 - Contributions: PRs and issues welcome for improvements and extensions
 
 ---
