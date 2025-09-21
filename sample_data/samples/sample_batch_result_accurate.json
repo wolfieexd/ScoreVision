@@ -1,0 +1,700 @@
+{
+  "batch_info": {
+    "batch_id": "BATCH_20250921_143500",
+    "submitted_at": "2025-09-21T14:35:00.000Z",
+    "processed_at": "2025-09-21T14:38:12.456Z",
+    "total_sheets": 13,
+    "processed_sheets": 13,
+    "failed_sheets": 0,
+    "processing_time_seconds": 192.456,
+    "institution_id": "enterprise_client_001",
+    "assessment_type": "Multi-Subject Assessment Set A",
+    "processing_node": "node_02"
+  },
+  "answer_key": {
+    "Python": {
+      "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+      "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+    },
+    "EDA": {
+      "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+      "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+    },
+    "SQL": {
+      "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+      "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+    },
+    "Power_BI": {
+      "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+      "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+    },
+    "Statistics": {
+      "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+      "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+    }
+  },
+  "students_results": [
+    {
+      "student_id": "STU_001",
+      "image_file": "Img1.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "b", "4": "c", "5": "c", "6": "a", "7": "c", "8": "d", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "a", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "a", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 97,
+        "wrong_answers": 3,
+        "unattempted": 0,
+        "percentage": 97.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 19, "total": 20, "percentage": 95.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 19, "total": 20, "percentage": 95.0},
+        "Power_BI": {"correct": 19, "total": 20, "percentage": 95.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.98,
+        "image_quality": "excellent",
+        "alignment_score": 0.99
+      }
+    },
+    {
+      "student_id": "STU_002",
+      "image_file": "Img2.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "a", "3": "b", "4": "d", "5": "a", "6": "a", "7": "c", "8": "c", "9": "b", "10": "a",
+          "11": "d", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "a", "24": "a", "25": "d", "26": "c", "27": "a", "28": "a", "29": "d", "30": "d",
+          "31": "c", "32": "a", "33": "a", "34": "d", "35": "d", "36": "d", "37": "a", "38": "a", "39": "d", "40": "d"
+        },
+        "SQL": {
+          "41": "a", "42": "c", "43": "c", "44": "c", "45": "c", "46": "a", "47": "a", "48": "a", "49": "c", "50": "d",
+          "51": "a", "52": "c", "53": "c", "54": "a", "55": "a", "56": "a", "57": "a", "58": "a", "59": "a", "60": "c"
+        },
+        "Power_BI": {
+          "61": "c", "62": "a", "63": "a", "64": "c", "65": "c", "66": "d", "67": "a", "68": "d", "69": "a", "70": "a",
+          "71": "a", "72": "a", "73": "c", "74": "a", "75": "a", "76": "a", "77": "a", "78": "c", "79": "a", "80": "a"
+        },
+        "Statistics": {
+          "81": "a", "82": "a", "83": "a", "84": "a", "85": "d", "86": "a", "87": "a", "88": "a", "89": "a", "90": "d",
+          "91": "c", "92": "c", "93": "a", "94": "c", "95": "a", "96": "a", "97": "a", "98": "a", "99": "a", "100": "a"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 52,
+        "wrong_answers": 46,
+        "unattempted": 2,
+        "percentage": 52.0,
+        "grade": "C+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 12, "total": 20, "percentage": 60.0},
+        "EDA": {"correct": 8, "total": 20, "percentage": 40.0},
+        "SQL": {"correct": 11, "total": 20, "percentage": 55.0},
+        "Power_BI": {"correct": 6, "total": 20, "percentage": 30.0},
+        "Statistics": {"correct": 15, "total": 20, "percentage": 75.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.91,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    },
+    {
+      "student_id": "STU_003",
+      "image_file": "Img3.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.99,
+        "image_quality": "excellent",
+        "alignment_score": 0.99
+      }
+    },
+    {
+      "student_id": "STU_004",
+      "image_file": "Img4.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.97,
+        "image_quality": "excellent",
+        "alignment_score": 0.98
+      }
+    },
+    {
+      "student_id": "STU_005",
+      "image_file": "Img5.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.93,
+        "image_quality": "good",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_006",
+      "image_file": "Img6.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.95,
+        "image_quality": "excellent",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_007",
+      "image_file": "Img7.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.89,
+        "image_quality": "good",
+        "alignment_score": 0.94
+      }
+    },
+    {
+      "student_id": "STU_008",
+      "image_file": "Img8.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.99,
+        "image_quality": "excellent",
+        "alignment_score": 0.99
+      }
+    },
+    {
+      "student_id": "STU_009",
+      "image_file": "Img16.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.92,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    },
+    {
+      "student_id": "STU_010",
+      "image_file": "Img17.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.94,
+        "image_quality": "excellent",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_011",
+      "image_file": "Img18.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.90,
+        "image_quality": "good",
+        "alignment_score": 0.95
+      }
+    },
+    {
+      "student_id": "STU_012",
+      "image_file": "Img19.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.98,
+        "image_quality": "excellent",
+        "alignment_score": 0.98
+      }
+    },
+    {
+      "student_id": "STU_013",
+      "image_file": "Img20.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "student_responses": {
+        "Python": {
+          "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+          "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+        },
+        "EDA": {
+          "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+          "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+        },
+        "SQL": {
+          "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+          "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a", "60": "b"
+        },
+        "Power_BI": {
+          "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+          "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+        },
+        "Statistics": {
+          "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+          "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+        }
+      },
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 100,
+        "wrong_answers": 0,
+        "unattempted": 0,
+        "percentage": 100.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "Python": {"correct": 20, "total": 20, "percentage": 100.0},
+        "EDA": {"correct": 20, "total": 20, "percentage": 100.0},
+        "SQL": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Power_BI": {"correct": 20, "total": 20, "percentage": 100.0},
+        "Statistics": {"correct": 20, "total": 20, "percentage": 100.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.93,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    }
+  ],
+  "batch_statistics": {
+    "average_score": 97.5,
+    "median_score": 100.0,
+    "highest_score": 100.0,
+    "lowest_score": 52.0,
+    "pass_rate": 100.0,
+    "grade_distribution": {
+      "A+": 12,
+      "A": 0,
+      "B+": 0,
+      "B": 0,
+      "C+": 1,
+      "C": 0,
+      "D+": 0,
+      "D": 0,
+      "F": 0
+    },
+    "subject_averages": {
+      "Python": 96.9,
+      "EDA": 96.9,
+      "SQL": 96.9,
+      "Power_BI": 96.9,
+      "Statistics": 96.9
+    }
+  },
+  "quality_summary": {
+    "average_confidence": 0.95,
+    "images_excellent_quality": 8,
+    "images_good_quality": 5,
+    "images_poor_quality": 0,
+    "processing_accuracy": 99.9
+  },
+  "export_info": {
+    "csv_file": "batch_results_accurate_20250921_143812.csv",
+    "excel_file": "batch_results_accurate_20250921_143812.xlsx", 
+    "pdf_report": "batch_summary_accurate_20250921_143812.pdf",
+    "generated_at": "2025-09-21T14:38:15.789Z"
+  }
+}

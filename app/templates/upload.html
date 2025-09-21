@@ -1,0 +1,667 @@
+{% extends "base.html" %}
+
+{% block title %}Upload OMR Sheet - OMR Evaluation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .upload-area:hover {
+        border-color: #007bff;
+        background-color: #f8f9fa;
+    }
+    .upload-area.dragover {
+        border-color: #007bff;
+        background-color: #e3f2fd;
+    }
+    .file-info {
+        background: #f8f9fa;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+    .processing {
+        display: none;
+    }
+    .result-card {
+        margin-top: 20px;
+        display: none;
+    }
+    @media (max-width: 576px) {
+        .upload-area {
+            padding: 20px;
+        }
+        .upload-area h5 {
+            font-size: 1rem;
+        }
+        .upload-area p {
+            font-size: 0.9rem;
+        }
+    }
+    @media screen and (orientation: portrait) {
+        .upload-area {
+            text-align: center;
+            padding: 25px;
+        }
+    }
+    @media screen and (orientation: landscape) {
+        .upload-area {
+            padding: 40px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h4><i class="fas fa-upload"></i> Upload OMR Sheet for Processing</h4>
+                </div>
+                <div class="card-body">
+                    <form id="uploadForm" enctype="multipart/form-data">
+                        <!-- OMR File Upload -->
+                        <div class="mb-4">
+                            <label class="form-label">
+                                <i class="fas fa-file-image text-primary"></i> 
+                                OMR Answer Sheet (Required)
+                            </label>
+                            <div class="upload-area" id="omrUploadArea">
+                                <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                                <h5>Drop OMR sheet here or click to browse</h5>
+                                <p class="text-muted">Supported formats: JPG, PNG, TIFF, BMP</p>
+                                <input type="file" id="omrFile" accept="image/*" style="display: none;" required>
+                            </div>
+                            <div id="omrFileInfo" class="file-info" style="display: none;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-file-image text-success"></i>
+                                        <span id="omrFileName"></span>
+                                        <small class="text-muted">(<span id="omrFileSize"></span>)</small>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="clearOMRFile()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Answer Key Upload -->
+                        <div class="mb-4">
+                            <label class="form-label">
+                                <i class="fas fa-key text-success"></i> 
+                                Answer Key (Required)
+                            </label>
+                            <div class="upload-area" id="answerKeyUploadArea">
+                                <i class="fas fa-file-code fa-3x text-muted mb-3"></i>
+                                <h5>Drop answer key here or click to browse</h5>
+                                <p class="text-muted">Supported formats: JSON, Excel (.xlsx, .xls)</p>
+                                <input type="file" id="answerKeyFile" accept=".json,.xlsx,.xls" style="display: none;" required>
+                            </div>
+                            <div id="answerKeyFileInfo" class="file-info" style="display: none;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-file-code text-success"></i>
+                                        <span id="answerKeyFileName"></span>
+                                        <small class="text-muted">(<span id="answerKeyFileSize"></span>)</small>
+                                    </div>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="clearAnswerKeyFile()">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Helper links -->
+                        <div class="mb-4">
+                            <small class="text-muted">
+                                Need help with answer keys? 
+                                <a href="#" onclick="downloadSampleJSON()" class="text-decoration-none">Download JSON sample</a> | 
+                                <a href="#" onclick="downloadExcelTemplate()" class="text-decoration-none">Download Excel template</a>
+                            </small>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" id="processBtn" class="btn btn-primary btn-lg" disabled>
+                                <i class="fas fa-cogs"></i> Process OMR Sheet
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Processing Indicator -->
+                    <div id="processingIndicator" class="processing text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Processing...</span>
+                        </div>
+                        <p class="mt-3">Processing OMR sheet... This may take a few moments.</p>
+                    </div>
+
+                    <!-- Error Alert -->
+                    <div id="errorAlert" class="alert alert-danger mt-3" style="display: none;">
+                        <strong>Error:</strong> <span id="errorMessage"></span>
+                    </div>
+
+                    <!-- Result Card -->
+                    <div id="resultCard" class="result-card">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white">
+                                <h5><i class="fas fa-check-circle"></i> Processing Complete</h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Student Information -->
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>Student ID:</strong> <span id="resultStudentId">-</span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Paper Set:</strong> <span id="resultPaperSet">-</span>
+                                    </div>
+                                </div>
+
+                                <!-- Score Display -->
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-center">
+                                        <div class="border rounded p-3">
+                                            <h3 class="text-primary mb-0" id="totalScore">0</h3>
+                                            <small class="text-muted">Score</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="border rounded p-3">
+                                            <h3 class="text-info mb-0" id="maxScore">0</h3>
+                                            <small class="text-muted">Max Score</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="border rounded p-3">
+                                            <h3 class="text-success mb-0" id="percentage">0%</h3>
+                                            <small class="text-muted">Percentage</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="border rounded p-3">
+                                            <h3 class="text-warning mb-0" id="grade">-</h3>
+                                            <small class="text-muted">Grade</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Performance Breakdown -->
+                                <div class="row mb-4">
+                                    <div class="col-md-3 text-center">
+                                        <div class="text-success">
+                                            <i class="fas fa-check-circle fa-2x"></i>
+                                            <div><strong id="correctAnswers">0</strong></div>
+                                            <small>Correct</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="text-danger">
+                                            <i class="fas fa-times-circle fa-2x"></i>
+                                            <div><strong id="wrongAnswers">0</strong></div>
+                                            <small>Wrong</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="text-secondary">
+                                            <i class="fas fa-question-circle fa-2x"></i>
+                                            <div><strong id="unattempted">0</strong></div>
+                                            <small>Unattempted</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-center">
+                                        <div class="text-info">
+                                            <i class="fas fa-bullseye fa-2x"></i>
+                                            <div><strong id="accuracy">0%</strong></div>
+                                            <small>Accuracy</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="d-flex gap-2 justify-content-center">
+                                    <a id="downloadReportBtn" href="#" class="btn btn-success">
+                                        <i class="fas fa-download"></i> Download Report
+                                    </a>
+                                    <button type="button" class="btn btn-secondary" onclick="startNewProcessing()">
+                                        <i class="fas fa-redo"></i> Process Another
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let uploadedFiles = {
+        omr: null,
+        answerKey: null
+    };
+
+    // Setup drag and drop for OMR file
+    setupFileUpload('omrUploadArea', 'omrFile', 'omrFileInfo', 'omr', ['image/jpeg', 'image/jpg', 'image/png', 'image/tiff', 'image/bmp']);
+    
+    // Setup drag and drop for answer key (JSON and Excel)
+    setupFileUpload('answerKeyUploadArea', 'answerKeyFile', 'answerKeyFileInfo', 'answerKey', ['application/json', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel']);
+
+    function setupFileUpload(uploadAreaId, fileInputId, fileInfoId, fileType, acceptedTypes) {
+        const uploadArea = document.getElementById(uploadAreaId);
+        const fileInput = document.getElementById(fileInputId);
+        const fileInfo = document.getElementById(fileInfoId);
+
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                handleFileSelection(e.dataTransfer.files[0], fileType, fileInfo);
+            }
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFileSelection(e.target.files[0], fileType, fileInfo);
+            }
+        });
+    }
+
+    function handleFileSelection(file, fileType, fileInfoElement) {
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        const uploadUrl = fileType === 'omr' ? '/api/upload-omr' : '/api/upload-answer-key';
+        
+        fetch(uploadUrl, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Upload response:', data);
+            if (data.success) {
+                if (fileType === 'answerKey' && data.type === 'multiple_sheets') {
+                    // Store the sheets data temporarily and show selection
+                    uploadedFiles[fileType] = 'pending_sheet_selection';
+                    showSheetSelection(data, fileInfoElement);
+                } else if (fileType === 'answerKey' && data.validation && !data.validation.valid) {
+                    // Store filename even if validation failed, show selection UI
+                    uploadedFiles[fileType] = data.filename;
+                    showAnswerKeySelection(data, fileInfoElement);
+                } else {
+                    // Normal case - store the filename
+                    uploadedFiles[fileType] = data.filename;
+                }
+                
+                console.log('Stored filename for', fileType, ':', uploadedFiles[fileType]);
+                displayFileInfo(file, fileInfoElement, fileType);
+                checkFormComplete();
+            } else {
+                showError(data.error || 'Upload failed');
+            }
+        })
+        .catch(error => {
+            showError('Upload failed: ' + error.message);
+        });
+    }
+
+    function displayFileInfo(file, fileInfoElement, fileType) {
+        const fileName = fileType === 'omr' ? 'omrFileName' : 'answerKeyFileName';
+        const fileSize = fileType === 'omr' ? 'omrFileSize' : 'answerKeyFileSize';
+        
+        document.getElementById(fileName).textContent = file.name;
+        document.getElementById(fileSize).textContent = formatFileSize(file.size);
+        fileInfoElement.style.display = 'block';
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function clearOMRFile() {
+        uploadedFiles.omr = null;
+        document.getElementById('omrFileInfo').style.display = 'none';
+        document.getElementById('omrFile').value = '';
+        checkFormComplete();
+    }
+
+    function clearAnswerKeyFile() {
+        uploadedFiles.answerKey = null;
+        document.getElementById('answerKeyFileInfo').style.display = 'none';
+        document.getElementById('answerKeyFile').value = '';
+        checkFormComplete();
+    }
+
+    function checkFormComplete() {
+        const processBtn = document.getElementById('processBtn');
+        console.log('Checking form completion:');
+        console.log('OMR file:', uploadedFiles.omr);
+        console.log('Answer key file:', uploadedFiles.answerKey);
+        console.log('Both files present:', !!(uploadedFiles.omr && uploadedFiles.answerKey));
+        processBtn.disabled = !(uploadedFiles.omr && uploadedFiles.answerKey);
+        console.log('Process button disabled:', processBtn.disabled);
+    }
+
+    // Add a debug function that can be called from browser console
+    window.debugUploadState = function() {
+        console.log('=== DEBUG UPLOAD STATE ===');
+        console.log('uploadedFiles:', uploadedFiles);
+        console.log('OMR file:', uploadedFiles.omr);
+        console.log('Answer key file:', uploadedFiles.answerKey);
+        console.log('Button element:', document.getElementById('processBtn'));
+        console.log('Button disabled:', document.getElementById('processBtn').disabled);
+        return uploadedFiles;
+    };
+
+    // Force enable button for testing
+    window.forceEnableButton = function() {
+        const processBtn = document.getElementById('processBtn');
+        processBtn.disabled = false;
+        console.log('Button force enabled for testing');
+    };
+
+    document.getElementById('uploadForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        processOMR();
+    });
+
+    function processOMR() {
+        if (!uploadedFiles.omr || !uploadedFiles.answerKey) {
+            showError('Please upload both OMR sheet and answer key');
+            return;
+        }
+        
+        const processingIndicator = document.getElementById('processingIndicator');
+        const resultCard = document.getElementById('resultCard');
+        const errorAlert = document.getElementById('errorAlert');
+        
+        // Hide previous results
+        resultCard.style.display = 'none';
+        errorAlert.style.display = 'none';
+        
+        // Show processing indicator
+        processingIndicator.style.display = 'block';
+        
+        const requestData = {
+            omr_file: uploadedFiles.omr,
+            answer_key_file: uploadedFiles.answerKey
+        };
+        
+        fetch('/api/process-omr', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            processingIndicator.style.display = 'none';
+            
+            if (data.success) {
+                displayResults(data.result);
+            } else {
+                showError(data.error || 'Processing failed');
+            }
+        })
+        .catch(error => {
+            processingIndicator.style.display = 'none';
+            showError('Processing failed: ' + error.message);
+        });
+    }
+
+    function displayResults(result) {
+        console.log('Displaying results:', result);
+        
+        // Extract validation data
+        const validation = result.validation || {};
+        console.log('Validation data:', validation);
+        
+        // Calculate display values
+        const totalQuestions = validation.total_questions || 0;
+        const correctAnswers = validation.correct_answers || 0;
+        const wrongAnswers = validation.wrong_answers || 0;
+        const unattempted = validation.unattempted || 0;
+        const percentage = validation.percentage || 0;
+        const grade = validation.grade || 'F';
+        
+        // Display basic results
+        document.getElementById('resultStudentId').textContent = result.student_id || 'N/A';
+        document.getElementById('resultPaperSet').textContent = result.paper_set || 'N/A';
+        document.getElementById('totalScore').textContent = correctAnswers;
+        document.getElementById('maxScore').textContent = totalQuestions;
+        document.getElementById('percentage').textContent = percentage.toFixed(1) + '%';
+        document.getElementById('grade').textContent = grade;
+        document.getElementById('correctAnswers').textContent = correctAnswers;
+        document.getElementById('wrongAnswers').textContent = wrongAnswers;
+        document.getElementById('unattempted').textContent = unattempted;
+        document.getElementById('accuracy').textContent = percentage.toFixed(1) + '%';
+        
+        console.log('Results displayed:', {
+            totalQuestions, correctAnswers, wrongAnswers, unattempted, percentage, grade
+        });
+        
+        document.getElementById('resultCard').style.display = 'block';
+    }
+
+    function calculateGrade(percentage) {
+        if (percentage >= 90) return 'A+';
+        if (percentage >= 80) return 'A';
+        if (percentage >= 70) return 'B+';
+        if (percentage >= 60) return 'B';
+        if (percentage >= 50) return 'C';
+        return 'F';
+    }
+
+    function showError(message) {
+        document.getElementById('errorMessage').textContent = message;
+        document.getElementById('errorAlert').style.display = 'block';
+        document.getElementById('processingIndicator').style.display = 'none';
+    }
+
+    function startNewProcessing() {
+        // Reset form
+        uploadedFiles = { omr: null, answerKey: null };
+        document.getElementById('omrFileInfo').style.display = 'none';
+        document.getElementById('answerKeyFileInfo').style.display = 'none';
+        document.getElementById('resultCard').style.display = 'none';
+        document.getElementById('errorAlert').style.display = 'none';
+        document.getElementById('omrFile').value = '';
+        document.getElementById('answerKeyFile').value = '';
+        checkFormComplete();
+    }
+
+    function downloadSampleJSON() {
+        const sampleAnswerKey = {
+            "metadata": {
+                "title": "Sample Answer Key",
+                "questions": 20,
+                "choices": 4,
+                "created": new Date().toISOString()
+            },
+            "answers": {
+                "1": 0, "2": 1, "3": 2, "4": 3, "5": 0,
+                "6": 1, "7": 2, "8": 3, "9": 0, "10": 1,
+                "11": 2, "12": 3, "13": 0, "14": 1, "15": 2,
+                "16": 3, "17": 0, "18": 1, "19": 2, "20": 3
+            }
+        };
+        
+        const dataStr = JSON.stringify(sampleAnswerKey, null, 2);
+        const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        const url = URL.createObjectURL(dataBlob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'sample_answer_key.json';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+    }
+
+    function downloadExcelTemplate() {
+        // This would trigger download from server
+        window.open('/api/download-excel-template', '_blank');
+    }
+
+    function showSheetSelection(data, fileInfoElement) {
+        // Create sheet selection UI
+        const sheetNames = data.sheets;
+        const sheetsData = data.data;
+        
+        const selectionHTML = `
+            <div class="mt-3 p-3 border rounded bg-light">
+                <h6><i class="fas fa-table"></i> Multiple Sheets Detected</h6>
+                <p class="mb-2">Your Excel file contains multiple sheets. Please select which sheet contains the answer key:</p>
+                <div class="mb-3">
+                    ${sheetNames.map(sheetName => `
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sheetSelection" 
+                                   id="sheet_${sheetName}" value="${sheetName}">
+                            <label class="form-check-label" for="sheet_${sheetName}">
+                                <strong>${sheetName}</strong>
+                                <small class="text-muted d-block">
+                                    ${Object.keys(sheetsData[sheetName] || {}).length} questions found
+                                </small>
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="d-grid gap-2 d-md-flex">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="confirmSheetSelection()">
+                        <i class="fas fa-check"></i> Use Selected Sheet
+                    </button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="cancelSheetSelection()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        // Store the sheets data globally for later use
+        window.currentSheetsData = sheetsData;
+        
+        // Add the selection UI to the file info element
+        fileInfoElement.innerHTML += selectionHTML;
+        fileInfoElement.style.display = 'block';
+    }
+
+    function showAnswerKeySelection(data, fileInfoElement) {
+        // Handle answer key validation issues
+        // Implementation for validation display
+    }
+
+    function confirmSheetSelection() {
+        const selectedRadio = document.querySelector('input[name="sheetSelection"]:checked');
+        if (!selectedRadio) {
+            showError('Please select a sheet to continue');
+            return;
+        }
+        
+        const selectedSheet = selectedRadio.value;
+        const sheetsData = window.currentSheetsData;
+        const selectedAnswerKey = sheetsData[selectedSheet];
+        
+        // Save the selected answer key as JSON
+        fetch('/api/save-selected-sheet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sheet_name: selectedSheet,
+                answer_key: selectedAnswerKey
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update the uploadedFiles with the saved filename
+                uploadedFiles.answerKey = data.filename;
+                console.log('Sheet selection confirmed. Saved as:', data.filename);
+                
+                // Update the file info display
+                const fileInfoElement = document.getElementById('answerKeyFileInfo');
+                fileInfoElement.innerHTML = `
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong id="answerKeyFileName">Answer Key (${selectedSheet})</strong>
+                            <small class="text-muted d-block">Excel sheet converted to JSON • ${data.questions_count} questions</small>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeAnswerKeyFile()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                // Check if form is complete
+                checkFormComplete();
+            } else {
+                showError(data.error || 'Failed to save selected sheet');
+            }
+        })
+        .catch(error => {
+            showError('Error saving sheet selection: ' + error.message);
+        });
+    }
+
+    function cancelSheetSelection() {
+        // Reset the answer key upload
+        uploadedFiles.answerKey = null;
+        const fileInfoElement = document.getElementById('answerKeyFileInfo');
+        fileInfoElement.style.display = 'none';
+        fileInfoElement.innerHTML = '';
+        document.getElementById('answerKeyFile').value = '';
+        checkFormComplete();
+    }
+
+    function removeAnswerKeyFile() {
+        // Remove the uploaded answer key file
+        uploadedFiles.answerKey = null;
+        const fileInfoElement = document.getElementById('answerKeyFileInfo');
+        fileInfoElement.style.display = 'none';
+        fileInfoElement.innerHTML = '';
+        document.getElementById('answerKeyFile').value = '';
+        checkFormComplete();
+    }
+
+    function removeOMRFile() {
+        // Remove the uploaded OMR file
+        uploadedFiles.omr = null;
+        const fileInfoElement = document.getElementById('omrFileInfo');
+        fileInfoElement.style.display = 'none';
+        fileInfoElement.innerHTML = '';
+        document.getElementById('omrFile').value = '';
+        checkFormComplete();
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}ScoreVision Pro - Service Status{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+    
+    .error-card {
+        background: white;
+        border-radius: 20px;
+        padding: 4rem;
+        text-align: center;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .error-icon {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 3rem;
+        color: white;
+    }
+    
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1a365d;
+        margin-bottom: 1rem;
+    }
+    
+    .error-message {
+        font-size: 1.2rem;
+        color: #64748b;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+    }
+    
+    .error-actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-primary-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        color: white;
+    }
+    
+    .btn-outline-custom {
+        background: transparent;
+        border: 2px solid #667eea;
+        color: #667eea;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-custom:hover {
+        background: #667eea;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .support-info {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid #e2e8f0;
+        color: #64748b;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="container">
+        <div class="error-card">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            
+            <h1 class="error-title">{{ error | default('Service Unavailable') }}</h1>
+            
+            <p class="error-message">
+                {{ message | default('We apologize for the inconvenience. Our technical team has been notified and is working to resolve this issue promptly.') }}
+            </p>
+            
+            <div class="error-actions">
+                <a href="{{ url_for('index') }}" class="btn-primary-custom">
+                    <i class="fas fa-home me-2"></i>Return Home
+                </a>
+                <a href="{{ url_for('dashboard') }}" class="btn-outline-custom">
+                    <i class="fas fa-chart-line me-2"></i>Dashboard
+                </a>
+            </div>
+            
+            <div class="support-info">
+                <p class="mb-2"><strong>Need immediate assistance?</strong></p>
+                <p class="mb-0">Contact our enterprise support team at <strong>support@scorevision.pro</strong></p>
+                <p class="mb-0">Or call our 24/7 helpline: <strong>+1 (800) 555-0123</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

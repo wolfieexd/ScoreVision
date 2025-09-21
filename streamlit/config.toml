@@ -1,0 +1,37 @@
+[global]
+
+# Show sidebar by default
+showSidebarNavigation = true
+
+# Development settings
+developmentMode = false
+
+# Data persistence
+dataFrameSerialization = "legacy"
+
+[server]
+
+# Enable CORS for external API calls
+enableCORS = true
+enableXsrfProtection = true
+
+# Performance settings
+maxUploadSize = 200
+maxMessageSize = 200
+
+[browser]
+
+# Browser settings
+gatherUsageStats = false
+serverAddress = "0.0.0.0"
+serverPort = 8501
+
+[theme]
+
+# Professional theme
+base = "light"
+primaryColor = "#2c3e50"
+backgroundColor = "#ffffff"
+secondaryBackgroundColor = "#f8f9fa"
+textColor = "#262730"
+font = "sans serif"

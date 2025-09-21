@@ -1,0 +1,61 @@
+{
+  "session_id": "math_excellence_batch_002",
+  "exam_info": {
+    "subject": "Advanced Mathematics",
+    "exam_date": "2024-03-20",
+    "total_questions": 40,
+    "total_students": 89,
+    "institution": "Science Academy"
+  },
+  "processing_info": {
+    "started_at": "2024-03-21T14:15:00Z",
+    "completed_at": "2024-03-21T14:24:30Z",
+    "processing_time": "9 minutes 30 seconds",
+    "accuracy_rate": 99.9,
+    "sheets_processed": 89,
+    "errors_detected": 0,
+    "quality_score": 99.1
+  },
+  "statistics": {
+    "average_score": 87.6,
+    "highest_score": 117,
+    "lowest_score": 42,
+    "median_score": 89,
+    "standard_deviation": 19.2,
+    "pass_rate": 91.0,
+    "grade_distribution": {
+      "A": 28,
+      "B": 25,
+      "C": 19,
+      "D": 9,
+      "F": 8
+    }
+  },
+  "question_analysis": {
+    "most_difficult": [29, 37, 39, 40],
+    "easiest": [1, 2, 11, 15],
+    "discrimination_index": {
+      "excellent": 28,
+      "good": 10,
+      "fair": 2,
+      "poor": 0
+    },
+    "category_performance": {
+      "Algebra and Functions": 82.4,
+      "Geometry and Trigonometry": 78.9,
+      "Calculus": 71.2,
+      "Statistics and Probability": 74.8
+    }
+  },
+  "quality_metrics": {
+    "sheet_quality": {
+      "excellent": 87,
+      "good": 2,
+      "fair": 0,
+      "poor": 0
+    },
+    "bubble_detection_confidence": 98.9,
+    "alignment_accuracy": 99.7,
+    "noise_levels": "minimal"
+  }
+}

@@ -1,0 +1,999 @@
+{% extends "base.html" %}
+
+{% block title %}Quality Validation - OMR Evaluation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .validation-card {
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+    }
+    .validation-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .quality-score {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        color: white;
+        margin: 0 auto;
+    }
+    .quality-excellent { background: linear-gradient(135deg, #28a745, #20c997); }
+    .quality-good { background: linear-gradient(135deg, #17a2b8, #6f42c1); }
+    .quality-average { background: linear-gradient(135deg, #ffc107, #fd7e14); }
+    .quality-poor { background: linear-gradient(135deg, #dc3545, #e83e8c); }
+    
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        border-radius: 10px;
+        padding: 40px;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: white;
+    }
+    .upload-area:hover {
+        border-color: #007bff;
+        background-color: #f8f9fa;
+    }
+    .upload-area.dragover {
+        border-color: #007bff;
+        background-color: #e3f2fd;
+    }
+    
+    .validation-metric {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .metric-excellent { color: #28a745; }
+    .metric-good { color: #17a2b8; }
+    .metric-average { color: #ffc107; }
+    .metric-poor { color: #dc3545; }
+    
+    .issue-item {
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border-left: 4px solid;
+    }
+    .issue-critical { 
+        background-color: #f8d7da; 
+        border-left-color: #dc3545; 
+        color: #721c24;
+    }
+    .issue-warning { 
+        background-color: #fff3cd; 
+        border-left-color: #ffc107; 
+        color: #856404;
+    }
+    .issue-info { 
+        background-color: #d1ecf1; 
+        border-left-color: #17a2b8; 
+        color: #0c5460;
+    }
+    
+    .settings-panel {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .image-comparison {
+        display: flex;
+        gap: 20px;
+        margin: 20px 0;
+    }
+    .image-comparison .image-container {
+        flex: 1;
+        text-align: center;
+    }
+    .image-comparison img {
+        max-width: 100%;
+        height: auto;
+        border: 2px solid #dee2e6;
+        border-radius: 8px;
+    }
+    
+    .validation-progress {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .bubble-detection-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 5px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        margin: 15px 0;
+    }
+    .bubble-item {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8em;
+        font-weight: bold;
+        color: white;
+        border: 2px solid;
+    }
+    .bubble-detected { background-color: #28a745; border-color: #1e7e34; }
+    .bubble-unclear { background-color: #ffc107; border-color: #d39e00; color: #212529; }
+    .bubble-empty { background-color: #6c757d; border-color: #545b62; }
+    .bubble-error { background-color: #dc3545; border-color: #bd2130; }
+    
+    @media (max-width: 768px) {
+        .image-comparison {
+            flex-direction: column;
+        }
+        .quality-score {
+            width: 60px;
+            height: 60px;
+            font-size: 1em;
+        }
+        .upload-area {
+            padding: 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-shield-alt text-primary"></i> Quality Validation</h2>
+        <div class="btn-group">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#validateImageModal">
+                <i class="fas fa-upload"></i> Validate Image
+            </button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#batchValidateModal">
+                <i class="fas fa-layer-group"></i> Batch Validate
+            </button>
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#settingsModal">
+                <i class="fas fa-cog"></i> Settings
+            </button>
+        </div>
+    </div>
+
+    <!-- Quality Metrics Overview -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="validation-metric">
+                <div class="metric-value metric-excellent" id="avgImageQuality">95%</div>
+                <div>Avg Image Quality</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="validation-metric">
+                <div class="metric-value metric-good" id="detectionAccuracy">98%</div>
+                <div>Detection Accuracy</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="validation-metric">
+                <div class="metric-value metric-average" id="processingSpeed">2.3s</div>
+                <div>Avg Processing Time</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="validation-metric">
+                <div class="metric-value metric-excellent" id="successRate">94%</div>
+                <div>Success Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Validations -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-history"></i> Recent Validations</h5>
+                <button class="btn btn-outline-primary btn-sm" onclick="refreshValidations()">
+                    <i class="fas fa-sync-alt"></i> Refresh
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="recentValidations">
+                <!-- Recent validations will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Validation Issues -->
+    <div class="card">
+        <div class="card-header">
+            <h5><i class="fas fa-exclamation-triangle"></i> Common Issues & Solutions</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Critical Issues</h6>
+                    <div class="issue-item issue-critical">
+                        <strong>Poor Image Quality</strong><br>
+                        <small>Low resolution or blurry images can cause detection failures. Minimum 300 DPI recommended.</small>
+                    </div>
+                    <div class="issue-item issue-critical">
+                        <strong>Skewed/Rotated Image</strong><br>
+                        <small>Images rotated more than 15° may not be properly corrected. Ensure proper alignment.</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h6>Warnings</h6>
+                    <div class="issue-item issue-warning">
+                        <strong>Multiple Marks Detected</strong><br>
+                        <small>Student marked multiple bubbles for a question. Review required for accurate scoring.</small>
+                    </div>
+                    <div class="issue-item issue-warning">
+                        <strong>Faint/Light Marks</strong><br>
+                        <small>Very light pencil marks may not be detected. Adjust sensitivity settings if needed.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Validate Image Modal -->
+<div class="modal fade" id="validateImageModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-shield-alt"></i> Image Quality Validation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Upload Section -->
+                <div id="uploadSection">
+                    <div class="upload-area" id="imageUploadArea">
+                        <i class="fas fa-cloud-upload-alt fa-3x text-muted mb-3"></i>
+                        <h5>Drop OMR image here or click to browse</h5>
+                        <p class="text-muted">Supported formats: JPG, PNG, TIFF, BMP</p>
+                        <input type="file" id="validationImageFile" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Validation Progress -->
+                <div id="validationProgress" class="validation-progress" style="display: none;">
+                    <h6><i class="fas fa-cog fa-spin"></i> Analyzing Image Quality...</h6>
+                    <div class="progress mb-3">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div id="progressStatus">Starting validation...</div>
+                </div>
+
+                <!-- Validation Results -->
+                <div id="validationResults" style="display: none;">
+                    <!-- Results will be displayed here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="retryValidationBtn" style="display: none;" onclick="retryValidation()">
+                    <i class="fas fa-redo"></i> Retry with Different Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Batch Validation Modal -->
+<div class="modal fade" id="batchValidateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-layer-group"></i> Batch Quality Validation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="batchUploadArea">
+                    <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                    <h5>Drop multiple OMR images here or click to browse</h5>
+                    <p class="text-muted">You can select multiple files at once</p>
+                    <input type="file" id="batchValidationFiles" accept="image/*" multiple style="display: none;">
+                </div>
+
+                <!-- Batch Progress -->
+                <div id="batchProgress" style="display: none;">
+                    <h6>Batch Validation Progress</h6>
+                    <div class="progress mb-3">
+                        <div id="batchProgressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div id="batchStatus">Processing files...</div>
+                </div>
+
+                <!-- Batch Results -->
+                <div id="batchResults" style="display: none;">
+                    <!-- Batch results will be displayed here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success" id="downloadBatchReportBtn" style="display: none;">
+                    <i class="fas fa-download"></i> Download Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal fade" id="settingsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-cog"></i> Validation Settings</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="validationSettingsForm">
+                    <!-- Image Quality Settings -->
+                    <h6>Image Quality Thresholds</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Minimum Resolution (DPI)</label>
+                            <input type="number" class="form-control" id="minResolution" value="150" min="100" max="600">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Brightness Range</label>
+                            <div class="d-flex gap-2">
+                                <input type="number" class="form-control" id="minBrightness" value="50" min="0" max="255" placeholder="Min">
+                                <input type="number" class="form-control" id="maxBrightness" value="200" min="0" max="255" placeholder="Max">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detection Settings -->
+                    <h6>Detection Parameters</h6>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Bubble Detection Sensitivity</label>
+                            <select class="form-select" id="bubblesensitivity">
+                                <option value="low">Low (Conservative)</option>
+                                <option value="medium" selected>Medium (Balanced)</option>
+                                <option value="high">High (Aggressive)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Skew Correction Tolerance</label>
+                            <input type="number" class="form-control" id="skewTolerance" value="15" min="1" max="45">
+                            <small class="text-muted">Maximum angle in degrees</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Quality Score Threshold</label>
+                            <input type="number" class="form-control" id="qualityThreshold" value="70" min="1" max="100">
+                            <small class="text-muted">Minimum quality score %</small>
+                        </div>
+                    </div>
+
+                    <!-- Advanced Settings -->
+                    <h6>Advanced Options</h6>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="enablePreprocessing" checked>
+                                <label class="form-check-label" for="enablePreprocessing">
+                                    Enable automatic image preprocessing
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="strictValidation">
+                                <label class="form-check-label" for="strictValidation">
+                                    Enable strict validation mode
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="saveValidationImages">
+                                <label class="form-check-label" for="saveValidationImages">
+                                    Save processed images for review
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="saveValidationSettings()">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let validationHistory = [];
+    let currentValidation = null;
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+        loadValidationHistory();
+        loadValidationSettings();
+        setupFileUploads();
+    });
+
+    function setupFileUploads() {
+        // Single image validation
+        setupUploadArea('imageUploadArea', 'validationImageFile', handleSingleImageValidation);
+        
+        // Batch validation
+        setupUploadArea('batchUploadArea', 'batchValidationFiles', handleBatchValidation);
+    }
+
+    function setupUploadArea(areaId, inputId, handler) {
+        const area = document.getElementById(areaId);
+        const input = document.getElementById(inputId);
+        
+        area.addEventListener('click', () => input.click());
+        area.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            area.classList.add('dragover');
+        });
+        area.addEventListener('dragleave', () => {
+            area.classList.remove('dragover');
+        });
+        area.addEventListener('drop', (e) => {
+            e.preventDefault();
+            area.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) {
+                if (inputId === 'batchValidationFiles') {
+                    handler(Array.from(e.dataTransfer.files));
+                } else {
+                    handler(e.dataTransfer.files[0]);
+                }
+            }
+        });
+        input.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                if (inputId === 'batchValidationFiles') {
+                    handler(Array.from(e.target.files));
+                } else {
+                    handler(e.target.files[0]);
+                }
+            }
+        });
+    }
+
+    function loadValidationHistory() {
+        fetch('/api/validation-history')
+            .then(response => response.json())
+            .then(data => {
+                validationHistory = data.validations || [];
+                displayValidationHistory();
+                updateMetrics();
+            })
+            .catch(error => {
+                console.error('Error loading validation history:', error);
+                displayNoValidations();
+            });
+    }
+
+    function displayValidationHistory() {
+        const container = document.getElementById('recentValidations');
+        
+        if (validationHistory.length === 0) {
+            displayNoValidations();
+            return;
+        }
+
+        container.innerHTML = validationHistory.slice(0, 5).map(validation => {
+            const qualityScore = validation.quality_score || 0;
+            const qualityClass = getQualityClass(qualityScore);
+            
+            return `
+                <div class="validation-card mb-3 p-3" onclick="viewValidationDetail('${validation.id}')">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="quality-score ${qualityClass}">
+                                ${qualityScore}%
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <h6 class="mb-1">${validation.filename}</h6>
+                            <small class="text-muted">
+                                ${new Date(validation.processed_at).toLocaleString()}
+                            </small>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        <div><small>Resolution</small></div>
+                                        <div><strong>${validation.resolution || 'N/A'}</strong></div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-info">
+                                        <i class="fas fa-search"></i>
+                                        <div><small>Detected</small></div>
+                                        <div><strong>${validation.bubbles_detected || 0}</strong></div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <div><small>Issues</small></div>
+                                        <div><strong>${validation.issues_count || 0}</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <span class="badge ${validation.status === 'passed' ? 'bg-success' : validation.status === 'warning' ? 'bg-warning' : 'bg-danger'}">
+                                ${validation.status || 'Unknown'}
+                            </span>
+                        </div>
+                        <div class="col-md-1 text-center">
+                            <button class="btn btn-sm btn-outline-primary" onclick="event.stopPropagation(); downloadValidationReport('${validation.id}')">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function displayNoValidations() {
+        document.getElementById('recentValidations').innerHTML = `
+            <div class="text-center py-4">
+                <i class="fas fa-shield-alt fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No validations performed yet</h5>
+                <p class="text-muted">Upload an OMR image to start quality validation</p>
+            </div>
+        `;
+    }
+
+    function updateMetrics() {
+        if (validationHistory.length === 0) return;
+        
+        const avgQuality = validationHistory.reduce((sum, v) => sum + (v.quality_score || 0), 0) / validationHistory.length;
+        const avgAccuracy = validationHistory.reduce((sum, v) => sum + (v.detection_accuracy || 0), 0) / validationHistory.length;
+        const avgTime = validationHistory.reduce((sum, v) => sum + (v.processing_time || 0), 0) / validationHistory.length;
+        const successRate = (validationHistory.filter(v => v.status === 'passed').length / validationHistory.length) * 100;
+        
+        document.getElementById('avgImageQuality').textContent = avgQuality.toFixed(0) + '%';
+        document.getElementById('detectionAccuracy').textContent = avgAccuracy.toFixed(0) + '%';
+        document.getElementById('processingSpeed').textContent = avgTime.toFixed(1) + 's';
+        document.getElementById('successRate').textContent = successRate.toFixed(0) + '%';
+        
+        // Update metric classes based on values
+        updateMetricClass('avgImageQuality', avgQuality);
+        updateMetricClass('detectionAccuracy', avgAccuracy);
+        updateMetricClass('successRate', successRate);
+    }
+
+    function updateMetricClass(elementId, value) {
+        const element = document.getElementById(elementId);
+        element.className = 'metric-value ' + getMetricClass(value);
+    }
+
+    function getMetricClass(value) {
+        if (value >= 90) return 'metric-excellent';
+        if (value >= 75) return 'metric-good';
+        if (value >= 60) return 'metric-average';
+        return 'metric-poor';
+    }
+
+    function getQualityClass(score) {
+        if (score >= 90) return 'quality-excellent';
+        if (score >= 75) return 'quality-good';
+        if (score >= 60) return 'quality-average';
+        return 'quality-poor';
+    }
+
+    function handleSingleImageValidation(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Please select a valid image file');
+            return;
+        }
+
+        document.getElementById('uploadSection').style.display = 'none';
+        document.getElementById('validationProgress').style.display = 'block';
+        document.getElementById('validationResults').style.display = 'none';
+
+        // Start validation process
+        validateImage(file);
+    }
+
+    function validateImage(file) {
+        const formData = new FormData();
+        formData.append('image', file);
+        
+        // Update progress
+        updateValidationProgress(0, 'Uploading image...');
+        
+        fetch('/api/validate-image', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Validation failed');
+            return response.json();
+        })
+        .then(data => {
+            updateValidationProgress(100, 'Validation complete');
+            setTimeout(() => {
+                displayValidationResults(data);
+            }, 500);
+        })
+        .catch(error => {
+            updateValidationProgress(100, 'Validation failed: ' + error.message);
+            displayValidationError(error.message);
+        });
+    }
+
+    function updateValidationProgress(percentage, status) {
+        const progressBar = document.getElementById('progressBar');
+        const progressStatus = document.getElementById('progressStatus');
+        
+        progressBar.style.width = percentage + '%';
+        progressStatus.textContent = status;
+        
+        if (percentage === 100) {
+            progressBar.classList.remove('progress-bar-animated');
+        }
+    }
+
+    function displayValidationResults(data) {
+        document.getElementById('validationProgress').style.display = 'none';
+        document.getElementById('validationResults').style.display = 'block';
+        
+        const container = document.getElementById('validationResults');
+        const result = data.validation_result;
+        const qualityScore = result.quality_score || 0;
+        const qualityClass = getQualityClass(qualityScore);
+        
+        container.innerHTML = `
+            <!-- Overall Quality Score -->
+            <div class="text-center mb-4">
+                <div class="quality-score ${qualityClass} mx-auto mb-3">
+                    ${qualityScore}%
+                </div>
+                <h5>Overall Quality Score</h5>
+                <p class="text-muted">${getQualityDescription(qualityScore)}</p>
+            </div>
+            
+            <!-- Detailed Metrics -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="validation-metric">
+                        <div class="metric-value ${getMetricClass(result.image_quality || 0)}">${result.image_quality || 0}%</div>
+                        <div>Image Quality</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="validation-metric">
+                        <div class="metric-value ${getMetricClass(result.detection_confidence || 0)}">${result.detection_confidence || 0}%</div>
+                        <div>Detection Confidence</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="validation-metric">
+                        <div class="metric-value ${result.skew_angle <= 5 ? 'metric-excellent' : result.skew_angle <= 10 ? 'metric-good' : 'metric-poor'}">${result.skew_angle || 0}°</div>
+                        <div>Skew Angle</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="validation-metric">
+                        <div class="metric-value metric-info">${result.bubbles_detected || 0}</div>
+                        <div>Bubbles Detected</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Image Comparison -->
+            ${result.processed_image_url ? `
+                <div class="image-comparison mb-4">
+                    <div class="image-container">
+                        <h6>Original Image</h6>
+                        <img src="${result.original_image_url}" alt="Original Image">
+                    </div>
+                    <div class="image-container">
+                        <h6>Processed Image</h6>
+                        <img src="${result.processed_image_url}" alt="Processed Image">
+                    </div>
+                </div>
+            ` : ''}
+            
+            <!-- Bubble Detection Grid -->
+            ${result.bubble_detections ? `
+                <div class="mb-4">
+                    <h6>Bubble Detection Results</h6>
+                    <div class="bubble-detection-grid">
+                        ${Object.entries(result.bubble_detections).map(([questionNum, detection]) => {
+                            const status = detection.confidence > 0.8 ? 'detected' : 
+                                          detection.confidence > 0.5 ? 'unclear' : 
+                                          detection.multiple_marks ? 'error' : 'empty';
+                            return `<div class="bubble-item bubble-${status}" title="Q${questionNum}: ${detection.confidence}% confidence">${questionNum}</div>`;
+                        }).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <!-- Issues and Recommendations -->
+            ${result.issues && result.issues.length > 0 ? `
+                <div class="mb-4">
+                    <h6>Issues Found</h6>
+                    ${result.issues.map(issue => `
+                        <div class="issue-item issue-${issue.severity}">
+                            <strong>${issue.title}</strong><br>
+                            <small>${issue.description}</small>
+                            ${issue.recommendation ? `<br><em>Recommendation: ${issue.recommendation}</em>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+            
+            <!-- Technical Details -->
+            <div class="card">
+                <div class="card-header">
+                    <h6>Technical Details</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <small><strong>Resolution:</strong> ${result.resolution || 'N/A'}</small><br>
+                            <small><strong>File Size:</strong> ${formatFileSize(result.file_size || 0)}</small><br>
+                            <small><strong>Color Mode:</strong> ${result.color_mode || 'N/A'}</small>
+                        </div>
+                        <div class="col-md-6">
+                            <small><strong>Processing Time:</strong> ${result.processing_time || 0}ms</small><br>
+                            <small><strong>Algorithm Version:</strong> ${result.algorithm_version || 'N/A'}</small><br>
+                            <small><strong>Validation ID:</strong> ${result.validation_id || 'N/A'}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Show retry button if quality is poor
+        if (qualityScore < 60) {
+            document.getElementById('retryValidationBtn').style.display = 'inline-block';
+        }
+    }
+
+    function displayValidationError(error) {
+        document.getElementById('validationProgress').style.display = 'none';
+        document.getElementById('validationResults').style.display = 'block';
+        
+        document.getElementById('validationResults').innerHTML = `
+            <div class="alert alert-danger">
+                <h6><i class="fas fa-exclamation-triangle"></i> Validation Failed</h6>
+                <p><strong>Error:</strong> ${error}</p>
+                <p>Please check your image and try again. Make sure the image is clear and properly oriented.</p>
+            </div>
+        `;
+        
+        document.getElementById('retryValidationBtn').style.display = 'inline-block';
+    }
+
+    function getQualityDescription(score) {
+        if (score >= 90) return 'Excellent quality - Ready for processing';
+        if (score >= 75) return 'Good quality - Should process well';
+        if (score >= 60) return 'Average quality - May require manual review';
+        return 'Poor quality - Recommend retaking image';
+    }
+
+    function handleBatchValidation(files) {
+        const imageFiles = files.filter(file => file.type.startsWith('image/'));
+        
+        if (imageFiles.length === 0) {
+            alert('Please select valid image files');
+            return;
+        }
+
+        document.getElementById('batchProgress').style.display = 'block';
+        document.getElementById('batchResults').style.display = 'none';
+        
+        processBatchValidation(imageFiles);
+    }
+
+    function processBatchValidation(files) {
+        const formData = new FormData();
+        files.forEach(file => formData.append('images', file));
+        
+        updateBatchProgress(0, `Processing ${files.length} files...`);
+        
+        fetch('/api/validate-batch', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            updateBatchProgress(100, 'Batch validation complete');
+            setTimeout(() => {
+                displayBatchResults(data);
+            }, 500);
+        })
+        .catch(error => {
+            updateBatchProgress(100, 'Batch validation failed: ' + error.message);
+        });
+    }
+
+    function updateBatchProgress(percentage, status) {
+        const progressBar = document.getElementById('batchProgressBar');
+        const statusElement = document.getElementById('batchStatus');
+        
+        progressBar.style.width = percentage + '%';
+        statusElement.textContent = status;
+    }
+
+    function displayBatchResults(data) {
+        document.getElementById('batchProgress').style.display = 'none';
+        document.getElementById('batchResults').style.display = 'block';
+        document.getElementById('downloadBatchReportBtn').style.display = 'inline-block';
+        
+        const container = document.getElementById('batchResults');
+        const results = data.results || [];
+        
+        container.innerHTML = `
+            <!-- Summary Statistics -->
+            <div class="row mb-4">
+                <div class="col-md-3 text-center">
+                    <h4 class="text-primary">${results.length}</h4>
+                    <small>Total Files</small>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h4 class="text-success">${results.filter(r => r.status === 'passed').length}</h4>
+                    <small>Passed</small>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h4 class="text-warning">${results.filter(r => r.status === 'warning').length}</h4>
+                    <small>Warnings</small>
+                </div>
+                <div class="col-md-3 text-center">
+                    <h4 class="text-danger">${results.filter(r => r.status === 'failed').length}</h4>
+                    <small>Failed</small>
+                </div>
+            </div>
+            
+            <!-- Individual Results -->
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Quality Score</th>
+                            <th>Status</th>
+                            <th>Issues</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${results.map(result => `
+                            <tr>
+                                <td>${result.filename}</td>
+                                <td>
+                                    <span class="badge ${getQualityBadgeClass(result.quality_score)}">${result.quality_score}%</span>
+                                </td>
+                                <td>
+                                    <span class="badge ${result.status === 'passed' ? 'bg-success' : result.status === 'warning' ? 'bg-warning' : 'bg-danger'}">
+                                        ${result.status}
+                                    </span>
+                                </td>
+                                <td>${result.issues_count || 0}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewValidationDetail('${result.validation_id}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function getQualityBadgeClass(score) {
+        if (score >= 90) return 'bg-success';
+        if (score >= 75) return 'bg-info';
+        if (score >= 60) return 'bg-warning';
+        return 'bg-danger';
+    }
+
+    function loadValidationSettings() {
+        fetch('/api/validation-settings')
+            .then(response => response.json())
+            .then(data => {
+                const settings = data.settings || {};
+                
+                // Populate form with current settings
+                document.getElementById('minResolution').value = settings.min_resolution || 150;
+                document.getElementById('minBrightness').value = settings.min_brightness || 50;
+                document.getElementById('maxBrightness').value = settings.max_brightness || 200;
+                document.getElementById('bubblesensitivity').value = settings.bubble_sensitivity || 'medium';
+                document.getElementById('skewTolerance').value = settings.skew_tolerance || 15;
+                document.getElementById('qualityThreshold').value = settings.quality_threshold || 70;
+                document.getElementById('enablePreprocessing').checked = settings.enable_preprocessing !== false;
+                document.getElementById('strictValidation').checked = settings.strict_validation || false;
+                document.getElementById('saveValidationImages').checked = settings.save_validation_images || false;
+            });
+    }
+
+    function saveValidationSettings() {
+        const settings = {
+            min_resolution: parseInt(document.getElementById('minResolution').value),
+            min_brightness: parseInt(document.getElementById('minBrightness').value),
+            max_brightness: parseInt(document.getElementById('maxBrightness').value),
+            bubble_sensitivity: document.getElementById('bubblesensitivity').value,
+            skew_tolerance: parseInt(document.getElementById('skewTolerance').value),
+            quality_threshold: parseInt(document.getElementById('qualityThreshold').value),
+            enable_preprocessing: document.getElementById('enablePreprocessing').checked,
+            strict_validation: document.getElementById('strictValidation').checked,
+            save_validation_images: document.getElementById('saveValidationImages').checked
+        };
+
+        fetch('/api/validation-settings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(settings)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Settings saved successfully!');
+                bootstrap.Modal.getInstance(document.getElementById('settingsModal')).hide();
+            } else {
+                alert('Error saving settings: ' + data.error);
+            }
+        });
+    }
+
+    function refreshValidations() {
+        loadValidationHistory();
+    }
+
+    function retryValidation() {
+        // Reset the modal to upload state
+        document.getElementById('uploadSection').style.display = 'block';
+        document.getElementById('validationProgress').style.display = 'none';
+        document.getElementById('validationResults').style.display = 'none';
+        document.getElementById('retryValidationBtn').style.display = 'none';
+    }
+
+    function viewValidationDetail(validationId) {
+        // Implementation for viewing detailed validation results
+        window.open(`/validation/${validationId}`, '_blank');
+    }
+
+    function downloadValidationReport(validationId) {
+        window.open(`/api/validation/${validationId}/report`, '_blank');
+    }
+
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+</script>
+{% endblock %}

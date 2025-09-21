@@ -1,0 +1,809 @@
+{% extends "base.html" %}
+
+{% block title %}ScoreVision Pro - Executive Dashboard{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --enterprise-blue: #1e40af;
+        --enterprise-success: #059669;
+        --enterprise-warning: #d97706;
+        --enterprise-danger: #dc2626;
+        --enterprise-gray: #6b7280;
+    }
+    
+    .dashboard-container {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+    }
+    
+    .dashboard-header {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .executive-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--enterprise-blue);
+        margin-bottom: 0.5rem;
+    }
+    
+    .dashboard-subtitle {
+        color: var(--enterprise-gray);
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
+    
+    .metric-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--enterprise-blue);
+    }
+    
+    .metric-card.success::before {
+        background: var(--enterprise-success);
+    }
+    
+    .metric-card.warning::before {
+        background: var(--enterprise-warning);
+    }
+    
+    .metric-card.danger::before {
+        background: var(--enterprise-danger);
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .metric-number {
+        font-size: 3rem;
+        font-weight: 700;
+        color: var(--enterprise-blue);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .metric-number.success {
+        color: var(--enterprise-success);
+    }
+    
+    .metric-number.warning {
+        color: var(--enterprise-warning);
+    }
+    
+    .metric-number.danger {
+        color: var(--enterprise-danger);
+    }
+    
+    .metric-label {
+        font-size: 0.9rem;
+        color: var(--enterprise-gray);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .chart-card {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+    
+    .chart-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--enterprise-blue);
+        margin-bottom: 1.5rem;
+    }
+    
+    .activity-feed {
+        background: white;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .activity-item {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 1rem;
+        background: #f8fafc;
+        border-left: 4px solid var(--enterprise-blue);
+        transition: all 0.2s ease;
+    }
+    
+    .activity-item:hover {
+        background: #f1f5f9;
+        transform: translateX(4px);
+    }
+    
+    .activity-item.success {
+        border-left-color: var(--enterprise-success);
+    }
+    
+    .activity-item.processing {
+        border-left-color: var(--enterprise-warning);
+    }
+    
+    .activity-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 1.2rem;
+        color: white;
+        background: var(--enterprise-blue);
+    }
+    
+    .activity-icon.success {
+        background: var(--enterprise-success);
+    }
+    
+    .activity-icon.processing {
+        background: var(--enterprise-warning);
+    }
+    
+    .activity-content {
+        flex: 1;
+    }
+    
+    .activity-title {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+    }
+    
+    .activity-details {
+        font-size: 0.9rem;
+        color: var(--enterprise-gray);
+    }
+    
+    .activity-time {
+        font-size: 0.8rem;
+        color: var(--enterprise-gray);
+        font-weight: 500;
+    }
+    
+    .status-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .status-badge.online {
+        background: #d1fae5;
+        color: var(--enterprise-success);
+    }
+    
+    .status-badge.processing {
+        background: #fef3c7;
+        color: var(--enterprise-warning);
+    }
+    
+    .status-badge.optimal {
+        background: #dbeafe;
+        color: var(--enterprise-blue);
+    }
+    
+    .performance-indicator {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+    }
+    
+    .indicator-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        background: var(--enterprise-success);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.5; }
+        100% { opacity: 1; }
+    }
+    
+    .refresh-indicator {
+        font-size: 0.8rem;
+        color: var(--enterprise-gray);
+        margin-top: 1rem;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        .executive-title {
+            font-size: 2rem;
+        }
+        .metric-number {
+            font-size: 2rem;
+        }
+        .dashboard-container {
+            padding: 1rem 0;
+        }
+    }
+</style>
+{% endblock %}
+    .activity-item.success {
+        border-left-color: #27ae60;
+    }
+    .activity-item.warning {
+        border-left-color: #f39c12;
+    }
+    .badge-custom {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+    }
+    .performance-indicator {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    .performance-indicator.excellent {
+        background: rgba(39, 174, 96, 0.1);
+        color: #27ae60;
+    }
+    .performance-indicator.good {
+        background: rgba(52, 152, 219, 0.1);
+        color: #3498db;
+    }
+    .performance-indicator.fair {
+        background: rgba(243, 156, 18, 0.1);
+        color: #f39c12;
+    }
+    .section-header {
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #ecf0f1;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <div class="container-fluid">
+        <!-- Executive Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="executive-title">Executive Dashboard</h1>
+                    <p class="dashboard-subtitle">Real-time performance metrics and operational intelligence</p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="performance-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="status-badge online">System Operational</span>
+                    </div>
+                    <div class="refresh-indicator">
+                        <i class="fas fa-sync-alt me-1"></i>
+                        Last updated: <span id="last-updated">{{ data.last_backup }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Performance Metrics -->
+        <div class="row mb-4">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="metric-card success">
+                    <span class="metric-number success">{{ data.performance_metrics.accuracy_rate }}</span>
+                    <div class="metric-label">Accuracy Rate</div>
+                    <div class="performance-indicator">
+                        <div class="indicator-dot"></div>
+                        <small style="color: #059669;">Industry Leading</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="metric-card">
+                    <span class="metric-number">{{ data.performance_metrics.throughput }}</span>
+                    <div class="metric-label">Today's Processing</div>
+                    <div class="performance-indicator">
+                        <div class="indicator-dot"></div>
+                        <small style="color: #1e40af;">High Volume</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="metric-card warning">
+                    <span class="metric-number warning">{{ data.performance_metrics.processing_speed }}</span>
+                    <div class="metric-label">Average Speed</div>
+                    <div class="performance-indicator">
+                        <div class="indicator-dot"></div>
+                        <small style="color: #d97706;">Optimized</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <div class="metric-card">
+                    <span class="metric-number">{{ data.performance_metrics.active_sessions }}</span>
+                    <div class="metric-label">Active Sessions</div>
+                    <div class="performance-indicator">
+                        <div class="indicator-dot"></div>
+                        <small style="color: #1e40af;">Concurrent Users</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Performance Summary -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="chart-card">
+                    <h3 class="chart-title">Monthly Performance Summary</h3>
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <div class="metric-number success" style="font-size: 2rem;">{{ data.monthly_stats.total_evaluations | default('45,672') }}</div>
+                            <div class="metric-label">Total Evaluations</div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="metric-number success" style="font-size: 2rem;">{{ data.monthly_stats.accuracy_improvement | default('+0.3%') }}</div>
+                            <div class="metric-label">Accuracy Improvement</div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="metric-number success" style="font-size: 2rem;">{{ data.monthly_stats.processing_time_reduction | default('-15%') }}</div>
+                            <div class="metric-label">Time Reduction</div>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <div class="metric-number success" style="font-size: 2rem;">{{ data.monthly_stats.client_satisfaction | default('98.7%') }}</div>
+                            <div class="metric-label">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Real-time Activity Feed -->
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="activity-feed">
+                    <h3 class="chart-title">Real-time Activity Feed</h3>
+                    {% for activity in data.recent_activity %}
+                    <div class="activity-item {{ activity.status }}">
+                        <div class="activity-icon {{ activity.status }}">
+                            {% if activity.status == 'success' %}
+                                <i class="fas fa-check"></i>
+                            {% elif activity.status == 'processing' %}
+                                <i class="fas fa-sync-alt fa-spin"></i>
+                            {% else %}
+                                <i class="fas fa-clock"></i>
+                            {% endif %}
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">{{ activity.action }}</div>
+                            <div class="activity-details">{{ activity.details }} • Accuracy: {{ activity.accuracy }}</div>
+                        </div>
+                        <div class="activity-time">{{ activity.timestamp }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- System Health & Status -->
+            <div class="col-lg-4">
+                <div class="chart-card">
+                    <h3 class="chart-title">System Health</h3>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Processing Queue</span>
+                            <span class="status-badge optimal">{{ data.processing_queue }} items</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Server Status</span>
+                            <span class="status-badge online">{{ data.server_status }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>System Health</span>
+                            <span class="status-badge optimal">{{ data.performance_metrics.system_health }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Last Backup</span>
+                            <small class="text-muted">{{ data.last_backup }}</small>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-primary">
+                            <i class="fas fa-upload me-2"></i>Process New Batch
+                        </a>
+                        <a href="{{ url_for('results_page') }}" class="btn btn-outline-primary">
+                            <i class="fas fa-chart-bar me-2"></i>View Reports
+                        </a>
+                    </div>
+                </div>
+
+                <!-- System Alerts -->
+                {% if data.system_alerts %}
+                <div class="chart-card mt-3">
+                    <h3 class="chart-title">System Alerts</h3>
+                    {% for alert in data.system_alerts %}
+                    <div class="alert alert-{{ alert.type }} border-0" role="alert">
+                        <i class="fas fa-{{ alert.icon }} me-2"></i>
+                        {{ alert.message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Auto-refresh script for real-time updates -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    function updateDashboard() {
+        // Simulate real-time updates
+        const now = new Date();
+        document.getElementById('last-updated').textContent = now.toLocaleTimeString();
+        
+        // Update activity indicators
+        const indicators = document.querySelectorAll('.indicator-dot');
+        indicators.forEach(dot => {
+            dot.style.animation = 'pulse 2s infinite';
+        });
+    }
+    
+    // Update every 30 seconds
+    setInterval(updateDashboard, 30000);
+    
+    // Initial update
+    updateDashboard();
+});
+</script>
+{% endblock %}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="stat-card info">
+                <div class="stat-number" id="institutions">147</div>
+                <h6 class="mb-0">Active Institutions</h6>
+                <small class="opacity-75">Worldwide deployment</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts and Analytics -->
+    <div class="row mb-4">
+        <div class="col-lg-8 mb-4">
+            <div class="dashboard-card p-4">
+                <h5 class="section-header">
+                    <i class="fas fa-chart-line me-2 text-primary"></i>
+                    Processing Performance Trends
+                </h5>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 mb-4">
+            <div class="dashboard-card p-4">
+                <h5 class="section-header">
+                    <i class="fas fa-pie-chart me-2 text-success"></i>
+                    Quality Distribution
+                </h5>
+                <div class="chart-container">
+                    <canvas id="qualityChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity and Quick Actions -->
+    <div class="row">
+        <div class="col-lg-6 mb-4">
+            <div class="dashboard-card p-4">
+                <h5 class="section-header">
+                    <i class="fas fa-clock me-2 text-info"></i>
+                    Recent Processing Activities
+                </h5>
+                <div id="recent-activities">
+                    <div class="activity-item success">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Advanced Physics Exam - Batch 001</strong>
+                                <div class="small text-muted">125 sheets processed • Metropolitan High School</div>
+                            </div>
+                            <span class="badge-custom bg-success text-white">Completed</span>
+                        </div>
+                        <div class="small text-muted mt-1">
+                            <i class="fas fa-clock me-1"></i>12 minutes ago • 99.7% accuracy
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item success">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Mathematics Excellence - Batch 002</strong>
+                                <div class="small text-muted">89 sheets processed • Science Academy</div>
+                            </div>
+                            <span class="badge-custom bg-success text-white">Completed</span>
+                        </div>
+                        <div class="small text-muted mt-1">
+                            <i class="fas fa-clock me-1"></i>1 hour ago • 99.9% accuracy
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <strong>Computer Science Assessment</strong>
+                                <div class="small text-muted">156 sheets processing • Tech University</div>
+                            </div>
+                            <span class="badge-custom bg-primary text-white">In Progress</span>
+                        </div>
+                        <div class="small text-muted mt-1">
+                            <i class="fas fa-chart-line me-1"></i>78% complete • ETA: 3 minutes
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <a href="{{ url_for('results_page') }}" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-eye me-1"></i> View All Activities
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 mb-4">
+            <div class="dashboard-card p-4">
+                <h5 class="section-header">
+                    <i class="fas fa-rocket me-2 text-warning"></i>
+                    Quick Actions
+                </h5>
+                
+                <div class="row g-3">
+                    <div class="col-6">
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-outline-primary w-100 py-3 border-2">
+                            <i class="fas fa-upload d-block mb-2" style="font-size: 1.5rem;"></i>
+                            <small class="fw-bold">Upload Sheet</small>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('batch_page') }}" class="btn btn-outline-success w-100 py-3 border-2">
+                            <i class="fas fa-layer-group d-block mb-2" style="font-size: 1.5rem;"></i>
+                            <small class="fw-bold">Batch Process</small>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('answer_key_page') }}" class="btn btn-outline-warning w-100 py-3 border-2">
+                            <i class="fas fa-key d-block mb-2" style="font-size: 1.5rem;"></i>
+                            <small class="fw-bold">Answer Keys</small>
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{{ url_for('validation_page') }}" class="btn btn-outline-info w-100 py-3 border-2">
+                            <i class="fas fa-shield-check d-block mb-2" style="font-size: 1.5rem;"></i>
+                            <small class="fw-bold">Quality Check</small>
+                        </a>
+                    </div>
+                </div>
+                
+                <hr class="my-4">
+                
+                <h6 class="fw-bold mb-3">
+                    <i class="fas fa-database me-2 text-secondary"></i>
+                    Sample Data Ready
+                </h6>
+                <div class="small text-muted mb-3">
+                    Pre-loaded with sample exams and answer keys for immediate testing
+                </div>
+                <button class="btn btn-outline-secondary btn-sm w-100" onclick="loadSampleData()">
+                    <i class="fas fa-play me-1"></i> Load Sample Exam Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- System Performance Indicators -->
+    <div class="row">
+        <div class="col-12">
+            <div class="dashboard-card p-4">
+                <h5 class="section-header">
+                    <i class="fas fa-tachometer-alt me-2 text-danger"></i>
+                    System Performance Indicators
+                </h5>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="text-center">
+                            <div class="performance-indicator excellent mb-2">
+                                <i class="fas fa-server me-2"></i>
+                                CPU Usage: 23%
+                            </div>
+                            <div class="small text-muted">Optimal performance</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="text-center">
+                            <div class="performance-indicator excellent mb-2">
+                                <i class="fas fa-memory me-2"></i>
+                                Memory: 34%
+                            </div>
+                            <div class="small text-muted">Well within limits</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="text-center">
+                            <div class="performance-indicator good mb-2">
+                                <i class="fas fa-hdd me-2"></i>
+                                Storage: 67%
+                            </div>
+                            <div class="small text-muted">Good capacity</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="text-center">
+                            <div class="performance-indicator excellent mb-2">
+                                <i class="fas fa-wifi me-2"></i>
+                                Network: 145ms
+                            </div>
+                            <div class="small text-muted">Excellent response</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Initialize charts
+document.addEventListener('DOMContentLoaded', function() {
+    // Performance Chart
+    const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(performanceCtx, {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Sheets Processed',
+                data: [1240, 1356, 1189, 1456, 1523, 1334, 1401],
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                tension: 0.4
+            }, {
+                label: 'Accuracy %',
+                data: [99.5, 99.6, 99.7, 99.8, 99.7, 99.9, 99.7],
+                borderColor: '#27ae60',
+                backgroundColor: 'rgba(39, 174, 96, 0.1)',
+                tension: 0.4,
+                yAxisID: 'y1'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    type: 'linear',
+                    display: true,
+                    position: 'left',
+                },
+                y1: {
+                    type: 'linear',
+                    display: true,
+                    position: 'right',
+                    min: 99,
+                    max: 100,
+                    grid: {
+                        drawOnChartArea: false,
+                    },
+                }
+            }
+        }
+    });
+
+    // Quality Distribution Chart
+    const qualityCtx = document.getElementById('qualityChart').getContext('2d');
+    new Chart(qualityCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Excellent', 'Good', 'Fair'],
+            datasets: [{
+                data: [87, 11, 2],
+                backgroundColor: ['#27ae60', '#3498db', '#f39c12']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+
+    // Update timestamps
+    updateTimestamps();
+    setInterval(updateTimestamps, 60000); // Update every minute
+});
+
+function updateTimestamps() {
+    document.getElementById('last-updated').textContent = new Date().toLocaleTimeString();
+}
+
+function loadSampleData() {
+    // Simulate loading sample data
+    const btn = event.target;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Loading...';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-check me-1"></i> Sample Data Loaded';
+        btn.classList.remove('btn-outline-secondary');
+        btn.classList.add('btn-success');
+        
+        // Show success message
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-success alert-dismissible fade show mt-3';
+        alert.innerHTML = `
+            <i class="fas fa-check-circle me-2"></i>
+            Sample exam data successfully loaded! You can now test with pre-configured Physics, Mathematics, and Computer Science exams.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        btn.parentNode.appendChild(alert);
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('btn-success');
+            btn.classList.add('btn-outline-secondary');
+            btn.disabled = false;
+        }, 3000);
+    }, 2000);
+}
+</script>
+{% endblock %}

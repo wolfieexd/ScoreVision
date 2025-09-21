@@ -1,0 +1,919 @@
+{% extends "base.html" %}
+
+{% block title %}Results - OMR Evaluation System{% endblock %}
+
+{% block extra_css %}
+<style>
+    .result-card {
+        transition: all 0.3s ease;
+        border: 1px solid #dee2e6;
+    }
+    .result-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .score-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 1.2em;
+        color: white;
+        margin: 0 auto;
+    }
+    .score-excellent { background: linear-gradient(135deg, #28a745, #20c997); }
+    .score-good { background: linear-gradient(135deg, #17a2b8, #6f42c1); }
+    .score-average { background: linear-gradient(135deg, #ffc107, #fd7e14); }
+    .score-poor { background: linear-gradient(135deg, #dc3545, #e83e8c); }
+    
+    .stats-widget {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+    }
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .performance-chart {
+        height: 300px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 15px;
+    }
+    .answer-analysis {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+    }
+    .question-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        margin: 3px 0;
+        border-radius: 5px;
+        background: white;
+        border-left: 4px solid #dee2e6;
+    }
+    .question-correct { border-left-color: #28a745; background-color: #f8fff9; }
+    .question-wrong { border-left-color: #dc3545; background-color: #fff5f5; }
+    .question-unattempted { border-left-color: #6c757d; background-color: #f8f9fa; }
+    
+    .filter-controls {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .export-panel {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .comparison-table {
+        font-size: 0.9em;
+    }
+    .comparison-table th {
+        background-color: #f8f9fa;
+        border-top: none;
+    }
+    .grade-badge {
+        font-size: 0.9em;
+        padding: 4px 8px;
+    }
+    
+    @media (max-width: 768px) {
+        .score-circle {
+            width: 60px;
+            height: 60px;
+            font-size: 1em;
+        }
+        .stats-number {
+            font-size: 2rem;
+        }
+        .filter-controls {
+            padding: 15px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-chart-line text-primary"></i> Results Dashboard</h2>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="refreshResults()">
+                <i class="fas fa-sync-alt"></i> Refresh
+            </button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exportModal">
+                <i class="fas fa-download"></i> Export
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-4">
+        <div class="col-md-3 mb-3">
+            <div class="stats-widget">
+                <div class="stats-number" id="totalProcessed">0</div>
+                <div>Total Processed</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stats-widget" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <div class="stats-number" id="averageScore">0%</div>
+                <div>Average Score</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stats-widget" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                <div class="stats-number" id="highestScore">0%</div>
+                <div>Highest Score</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stats-widget" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                <div class="stats-number" id="passRate">0%</div>
+                <div>Pass Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filter Controls -->
+    <div class="filter-controls">
+        <div class="row">
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Date Range</label>
+                <select class="form-select" id="dateFilter" onchange="applyFilters()">
+                    <option value="all">All Time</option>
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                    <option value="custom">Custom Range</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Score Range</label>
+                <select class="form-select" id="scoreFilter" onchange="applyFilters()">
+                    <option value="all">All Scores</option>
+                    <option value="excellent">90-100%</option>
+                    <option value="good">70-89%</option>
+                    <option value="average">50-69%</option>
+                    <option value="poor">Below 50%</option>
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Answer Key</label>
+                <select class="form-select" id="answerKeyFilter" onchange="applyFilters()">
+                    <option value="all">All Answer Keys</option>
+                    <!-- Options will be populated dynamically -->
+                </select>
+            </div>
+            <div class="col-md-3 mb-2">
+                <label class="form-label">Sort By</label>
+                <select class="form-select" id="sortBy" onchange="applyFilters()">
+                    <option value="date_desc">Date (Newest First)</option>
+                    <option value="date_asc">Date (Oldest First)</option>
+                    <option value="score_desc">Score (Highest First)</option>
+                    <option value="score_asc">Score (Lowest First)</option>
+                    <option value="student_id">Student ID</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mt-2" id="customDateRange" style="display: none;">
+            <div class="col-md-3">
+                <label class="form-label">From Date</label>
+                <input type="date" class="form-control" id="fromDate" onchange="applyFilters()">
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">To Date</label>
+                <input type="date" class="form-control" id="toDate" onchange="applyFilters()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Overview -->
+    <div class="row mb-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-bar"></i> Performance Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <div class="performance-chart">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-pie-chart"></i> Grade Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <div class="performance-chart">
+                        <canvas id="gradeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results List -->
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5><i class="fas fa-list"></i> Recent Results (<span id="resultCount">0</span>)</h5>
+                <div class="input-group" style="width: 300px;">
+                    <input type="text" class="form-control" id="searchResults" placeholder="Search by Student ID..." onkeyup="searchResults()">
+                    <button class="btn btn-outline-secondary" onclick="searchResults()">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div id="resultsList">
+                <!-- Results will be loaded here -->
+            </div>
+            
+            <!-- Pagination -->
+            <nav id="pagination" style="display: none;">
+                <ul class="pagination justify-content-center">
+                    <!-- Pagination will be generated here -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!-- Result Detail Modal -->
+<div class="modal fade" id="resultDetailModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-chart-line"></i> Detailed Result Analysis</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="resultDetailContent">
+                    <!-- Detail content will be loaded here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="downloadDetailBtn">
+                    <i class="fas fa-download"></i> Download Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-download"></i> Export Results</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="exportForm">
+                    <div class="mb-3">
+                        <label class="form-label">Export Format</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportExcel" value="excel" checked>
+                            <label class="form-check-label" for="exportExcel">
+                                <i class="fas fa-file-excel text-success"></i> Excel (.xlsx)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportCSV" value="csv">
+                            <label class="form-check-label" for="exportCSV">
+                                <i class="fas fa-file-csv text-info"></i> CSV (.csv)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportPDF" value="pdf">
+                            <label class="form-check-label" for="exportPDF">
+                                <i class="fas fa-file-pdf text-danger"></i> PDF Report
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Data to Include</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeBasicInfo" checked>
+                            <label class="form-check-label" for="includeBasicInfo">Basic Information</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeAnswers" checked>
+                            <label class="form-check-label" for="includeAnswers">Answer Details</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeStatistics">
+                            <label class="form-check-label" for="includeStatistics">Statistical Analysis</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeCharts">
+                            <label class="form-check-label" for="includeCharts">Charts and Graphs</label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Filter Results</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="exportCurrentFilter" checked>
+                            <label class="form-check-label" for="exportCurrentFilter">Use current filters</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="exportResults()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let currentResults = [];
+    let filteredResults = [];
+    let currentPage = 1;
+    let resultsPerPage = 10;
+    let performanceChart, gradeChart;
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+        loadResults();
+        initializeCharts();
+        setupEventListeners();
+    });
+
+    function setupEventListeners() {
+        document.getElementById('dateFilter').addEventListener('change', function() {
+            if (this.value === 'custom') {
+                document.getElementById('customDateRange').style.display = 'block';
+            } else {
+                document.getElementById('customDateRange').style.display = 'none';
+                applyFilters();
+            }
+        });
+    }
+
+    function loadResults() {
+        fetch('/api/results')
+            .then(response => response.json())
+            .then(data => {
+                currentResults = data.results || [];
+                filteredResults = [...currentResults];
+                updateStatistics();
+                updateCharts();
+                displayResults();
+                loadAnswerKeys();
+            })
+            .catch(error => {
+                console.error('Error loading results:', error);
+                displayNoResults();
+            });
+    }
+
+    function loadAnswerKeys() {
+        fetch('/api/answer-keys')
+            .then(response => response.json())
+            .then(data => {
+                const select = document.getElementById('answerKeyFilter');
+                const currentOption = select.innerHTML;
+                
+                data.answer_keys.forEach(key => {
+                    const option = document.createElement('option');
+                    option.value = key.id;
+                    option.textContent = key.name;
+                    select.appendChild(option);
+                });
+            });
+    }
+
+    function updateStatistics() {
+        const results = filteredResults;
+        const totalProcessed = results.length;
+        const averageScore = totalProcessed > 0 ? 
+            (results.reduce((sum, r) => sum + (r.percentage_score || 0), 0) / totalProcessed).toFixed(1) : 0;
+        const highestScore = totalProcessed > 0 ? 
+            Math.max(...results.map(r => r.percentage_score || 0)).toFixed(1) : 0;
+        const passRate = totalProcessed > 0 ? 
+            ((results.filter(r => (r.percentage_score || 0) >= 50).length / totalProcessed) * 100).toFixed(1) : 0;
+
+        document.getElementById('totalProcessed').textContent = totalProcessed;
+        document.getElementById('averageScore').textContent = averageScore + '%';
+        document.getElementById('highestScore').textContent = highestScore + '%';
+        document.getElementById('passRate').textContent = passRate + '%';
+    }
+
+    function initializeCharts() {
+        // Performance Distribution Chart
+        const perfCtx = document.getElementById('performanceChart').getContext('2d');
+        performanceChart = new Chart(perfCtx, {
+            type: 'bar',
+            data: {
+                labels: ['0-20%', '21-40%', '41-60%', '61-80%', '81-100%'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: [0, 0, 0, 0, 0],
+                    backgroundColor: [
+                        '#dc3545',
+                        '#fd7e14',
+                        '#ffc107',
+                        '#17a2b8',
+                        '#28a745'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+
+        // Grade Distribution Chart
+        const gradeCtx = document.getElementById('gradeChart').getContext('2d');
+        gradeChart = new Chart(gradeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['A+', 'A', 'B+', 'B', 'C', 'F'],
+                datasets: [{
+                    data: [0, 0, 0, 0, 0, 0],
+                    backgroundColor: [
+                        '#28a745',
+                        '#20c997',
+                        '#17a2b8',
+                        '#6f42c1',
+                        '#ffc107',
+                        '#dc3545'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    function updateCharts() {
+        // Update Performance Distribution
+        const perfDistribution = [0, 0, 0, 0, 0];
+        const gradeDistribution = [0, 0, 0, 0, 0, 0];
+
+        filteredResults.forEach(result => {
+            const score = result.percentage_score || 0;
+            
+            // Performance distribution
+            if (score <= 20) perfDistribution[0]++;
+            else if (score <= 40) perfDistribution[1]++;
+            else if (score <= 60) perfDistribution[2]++;
+            else if (score <= 80) perfDistribution[3]++;
+            else perfDistribution[4]++;
+            
+            // Grade distribution
+            const grade = calculateGrade(score);
+            if (grade === 'A+') gradeDistribution[0]++;
+            else if (grade === 'A') gradeDistribution[1]++;
+            else if (grade === 'B+') gradeDistribution[2]++;
+            else if (grade === 'B') gradeDistribution[3]++;
+            else if (grade === 'C') gradeDistribution[4]++;
+            else gradeDistribution[5]++;
+        });
+
+        performanceChart.data.datasets[0].data = perfDistribution;
+        performanceChart.update();
+
+        gradeChart.data.datasets[0].data = gradeDistribution;
+        gradeChart.update();
+    }
+
+    function calculateGrade(percentage) {
+        if (percentage >= 95) return 'A+';
+        if (percentage >= 85) return 'A';
+        if (percentage >= 75) return 'B+';
+        if (percentage >= 65) return 'B';
+        if (percentage >= 50) return 'C';
+        return 'F';
+    }
+
+    function getScoreClass(score) {
+        if (score >= 90) return 'score-excellent';
+        if (score >= 70) return 'score-good';
+        if (score >= 50) return 'score-average';
+        return 'score-poor';
+    }
+
+    function getGradeBadgeClass(grade) {
+        if (grade === 'A+' || grade === 'A') return 'bg-success';
+        if (grade === 'B+' || grade === 'B') return 'bg-info';
+        if (grade === 'C') return 'bg-warning';
+        return 'bg-danger';
+    }
+
+    function displayResults() {
+        const container = document.getElementById('resultsList');
+        const startIndex = (currentPage - 1) * resultsPerPage;
+        const endIndex = startIndex + resultsPerPage;
+        const pageResults = filteredResults.slice(startIndex, endIndex);
+        
+        document.getElementById('resultCount').textContent = filteredResults.length;
+
+        if (pageResults.length === 0) {
+            displayNoResults();
+            return;
+        }
+
+        container.innerHTML = pageResults.map(result => {
+            const score = result.percentage_score || 0;
+            const grade = calculateGrade(score);
+            const scoreClass = getScoreClass(score);
+            const gradeBadgeClass = getGradeBadgeClass(grade);
+            
+            return `
+                <div class="result-card mb-3 p-3" onclick="viewResultDetail('${result.id}')">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="score-circle ${scoreClass}">
+                                ${score.toFixed(1)}%
+                            </div>
+                            <small class="text-muted mt-1 d-block">
+                                <span class="badge ${gradeBadgeClass} grade-badge">${grade}</span>
+                            </small>
+                        </div>
+                        <div class="col-md-3">
+                            <h6 class="mb-1">
+                                <i class="fas fa-user text-primary"></i>
+                                ${result.student_id || 'N/A'}
+                            </h6>
+                            <small class="text-muted">
+                                <i class="fas fa-bookmark"></i> ${result.paper_set || 'N/A'}
+                            </small>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <div class="text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                        <div><strong>${result.correct_answers || 0}</strong></div>
+                                        <small>Correct</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-danger">
+                                        <i class="fas fa-times-circle"></i>
+                                        <div><strong>${result.incorrect_answers || 0}</strong></div>
+                                        <small>Wrong</small>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="text-secondary">
+                                        <i class="fas fa-question-circle"></i>
+                                        <div><strong>${(result.total_questions || 0) - (result.correct_answers || 0) - (result.incorrect_answers || 0)}</strong></div>
+                                        <small>Blank</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i>
+                                ${new Date(result.processed_at || Date.now()).toLocaleDateString()}
+                            </small>
+                            <div class="mt-1">
+                                <small class="text-muted">
+                                    <i class="fas fa-clock"></i>
+                                    ${new Date(result.processed_at || Date.now()).toLocaleTimeString()}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="btn-group-vertical btn-group-sm">
+                                <button class="btn btn-outline-primary btn-sm" onclick="event.stopPropagation(); viewResultDetail('${result.id}')">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                                <button class="btn btn-outline-success btn-sm" onclick="event.stopPropagation(); downloadResult('${result.id}')">
+                                    <i class="fas fa-download"></i> Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        updatePagination();
+    }
+
+    function displayNoResults() {
+        document.getElementById('resultsList').innerHTML = `
+            <div class="text-center py-5">
+                <i class="fas fa-chart-line fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No results found</h5>
+                <p class="text-muted">Try adjusting your filters or process some OMR sheets to see results here</p>
+            </div>
+        `;
+        document.getElementById('pagination').style.display = 'none';
+    }
+
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredResults.length / resultsPerPage);
+        const pagination = document.getElementById('pagination');
+        
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            return;
+        }
+
+        pagination.style.display = 'block';
+        const paginationList = pagination.querySelector('ul');
+        paginationList.innerHTML = '';
+
+        // Previous button
+        const prevItem = document.createElement('li');
+        prevItem.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+        prevItem.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>`;
+        paginationList.appendChild(prevItem);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+            if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                const pageItem = document.createElement('li');
+                pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+                pageItem.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+                paginationList.appendChild(pageItem);
+            } else if (i === currentPage - 3 || i === currentPage + 3) {
+                const ellipsis = document.createElement('li');
+                ellipsis.className = 'page-item disabled';
+                ellipsis.innerHTML = '<span class="page-link">...</span>';
+                paginationList.appendChild(ellipsis);
+            }
+        }
+
+        // Next button
+        const nextItem = document.createElement('li');
+        nextItem.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+        nextItem.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>`;
+        paginationList.appendChild(nextItem);
+    }
+
+    function changePage(page) {
+        const totalPages = Math.ceil(filteredResults.length / resultsPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            displayResults();
+        }
+    }
+
+    function applyFilters() {
+        const dateFilter = document.getElementById('dateFilter').value;
+        const scoreFilter = document.getElementById('scoreFilter').value;
+        const answerKeyFilter = document.getElementById('answerKeyFilter').value;
+        const sortBy = document.getElementById('sortBy').value;
+        
+        filteredResults = currentResults.filter(result => {
+            // Date filter
+            if (dateFilter !== 'all') {
+                const resultDate = new Date(result.processed_at);
+                const now = new Date();
+                
+                switch (dateFilter) {
+                    case 'today':
+                        if (resultDate.toDateString() !== now.toDateString()) return false;
+                        break;
+                    case 'week':
+                        const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                        if (resultDate < weekAgo) return false;
+                        break;
+                    case 'month':
+                        const monthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+                        if (resultDate < monthAgo) return false;
+                        break;
+                    case 'custom':
+                        const fromDate = new Date(document.getElementById('fromDate').value);
+                        const toDate = new Date(document.getElementById('toDate').value);
+                        if (resultDate < fromDate || resultDate > toDate) return false;
+                        break;
+                }
+            }
+            
+            // Score filter
+            if (scoreFilter !== 'all') {
+                const score = result.percentage_score || 0;
+                switch (scoreFilter) {
+                    case 'excellent':
+                        if (score < 90) return false;
+                        break;
+                    case 'good':
+                        if (score < 70 || score >= 90) return false;
+                        break;
+                    case 'average':
+                        if (score < 50 || score >= 70) return false;
+                        break;
+                    case 'poor':
+                        if (score >= 50) return false;
+                        break;
+                }
+            }
+            
+            // Answer key filter
+            if (answerKeyFilter !== 'all') {
+                if (result.answer_key_id !== answerKeyFilter) return false;
+            }
+            
+            return true;
+        });
+        
+        // Sort results
+        filteredResults.sort((a, b) => {
+            switch (sortBy) {
+                case 'date_desc':
+                    return new Date(b.processed_at) - new Date(a.processed_at);
+                case 'date_asc':
+                    return new Date(a.processed_at) - new Date(b.processed_at);
+                case 'score_desc':
+                    return (b.percentage_score || 0) - (a.percentage_score || 0);
+                case 'score_asc':
+                    return (a.percentage_score || 0) - (b.percentage_score || 0);
+                case 'student_id':
+                    return (a.student_id || '').localeCompare(b.student_id || '');
+                default:
+                    return 0;
+            }
+        });
+        
+        currentPage = 1;
+        updateStatistics();
+        updateCharts();
+        displayResults();
+    }
+
+    function searchResults() {
+        const query = document.getElementById('searchResults').value.toLowerCase();
+        
+        if (query) {
+            filteredResults = currentResults.filter(result => 
+                (result.student_id || '').toLowerCase().includes(query) ||
+                (result.paper_set || '').toLowerCase().includes(query)
+            );
+        } else {
+            applyFilters();
+            return;
+        }
+        
+        currentPage = 1;
+        updateStatistics();
+        updateCharts();
+        displayResults();
+    }
+
+    function refreshResults() {
+        loadResults();
+    }
+
+    function viewResultDetail(resultId) {
+        fetch(`/api/results/${resultId}`)
+            .then(response => response.json())
+            .then(data => {
+                displayResultDetail(data.result);
+                new bootstrap.Modal(document.getElementById('resultDetailModal')).show();
+            });
+    }
+
+    function displayResultDetail(result) {
+        const container = document.getElementById('resultDetailContent');
+        const score = result.percentage_score || 0;
+        const grade = calculateGrade(score);
+        
+        container.innerHTML = `
+            <!-- Student Information -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h6>Student Information</h6>
+                    <table class="table table-sm">
+                        <tr><td><strong>Student ID:</strong></td><td>${result.student_id || 'N/A'}</td></tr>
+                        <tr><td><strong>Paper Set:</strong></td><td>${result.paper_set || 'N/A'}</td></tr>
+                        <tr><td><strong>Processed:</strong></td><td>${new Date(result.processed_at).toLocaleString()}</td></tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h6>Score Summary</h6>
+                    <table class="table table-sm">
+                        <tr><td><strong>Score:</strong></td><td>${result.correct_answers}/${result.total_questions} (${score.toFixed(1)}%)</td></tr>
+                        <tr><td><strong>Grade:</strong></td><td><span class="badge ${getGradeBadgeClass(grade)}">${grade}</span></td></tr>
+                        <tr><td><strong>Correct:</strong></td><td class="text-success">${result.correct_answers}</td></tr>
+                        <tr><td><strong>Wrong:</strong></td><td class="text-danger">${result.incorrect_answers}</td></tr>
+                        <tr><td><strong>Unattempted:</strong></td><td class="text-secondary">${result.total_questions - result.correct_answers - result.incorrect_answers}</td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Answer Analysis -->
+            <div class="answer-analysis">
+                <h6>Answer Analysis</h6>
+                <div class="row">
+                    ${result.answers ? Object.entries(result.answers).map(([q, answer]) => {
+                        const isCorrect = answer.is_correct;
+                        const status = answer.student_answer === null ? 'unattempted' : (isCorrect ? 'correct' : 'wrong');
+                        
+                        return `
+                            <div class="col-md-6 col-lg-4 mb-2">
+                                <div class="question-item question-${status}">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <span><strong>Q${q}:</strong></span>
+                                        <span>
+                                            ${answer.student_answer !== null ? String.fromCharCode(65 + answer.student_answer) : '-'} 
+                                            ${isCorrect ? '<i class="fas fa-check text-success"></i>' : 
+                                              answer.student_answer !== null ? `<i class="fas fa-times text-danger"></i> (${String.fromCharCode(65 + answer.correct_answer)})` : 
+                                              '<i class="fas fa-minus text-secondary"></i>'}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('') : '<p class="text-muted">No answer details available</p>'}
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('downloadDetailBtn').onclick = () => downloadResult(result.id);
+    }
+
+    function downloadResult(resultId) {
+        window.open(`/api/results/${resultId}/download`, '_blank');
+    }
+
+    function exportResults() {
+        const format = document.querySelector('input[name="exportFormat"]:checked').value;
+        const filters = {
+            includeBasicInfo: document.getElementById('includeBasicInfo').checked,
+            includeAnswers: document.getElementById('includeAnswers').checked,
+            includeStatistics: document.getElementById('includeStatistics').checked,
+            includeCharts: document.getElementById('includeCharts').checked,
+            useCurrentFilter: document.getElementById('exportCurrentFilter').checked
+        };
+        
+        const params = new URLSearchParams({
+            format: format,
+            ...filters,
+            current_filters: filters.useCurrentFilter ? JSON.stringify(getCurrentFilters()) : ''
+        });
+        
+        window.open(`/api/results/export?${params.toString()}`, '_blank');
+        bootstrap.Modal.getInstance(document.getElementById('exportModal')).hide();
+    }
+
+    function getCurrentFilters() {
+        return {
+            dateFilter: document.getElementById('dateFilter').value,
+            scoreFilter: document.getElementById('scoreFilter').value,
+            answerKeyFilter: document.getElementById('answerKeyFilter').value,
+            sortBy: document.getElementById('sortBy').value,
+            fromDate: document.getElementById('fromDate').value,
+            toDate: document.getElementById('toDate').value
+        };
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,154 @@
+{
+  "batch_id": "BATCH_2025_092101",
+  "batch_info": {
+    "submitted_at": "2025-09-21T10:35:00.000Z",
+    "total_sheets": 25,
+    "processed_sheets": 25,
+    "failed_sheets": 0,
+    "processing_time": "00:03:45",
+    "exam_type": "Multi-Subject Assessment",
+    "institution": "Tech University",
+    "department": "Computer Science"
+  },
+  "batch_results": [
+    {
+      "student_id": "ST-4501",
+      "overall_score": 87,
+      "percentage": 87.0,
+      "grade": "A",
+      "subjects": {"Python": 18, "EDA": 17, "SQL": 16, "Power_BI": 18, "Statistics": 18},
+      "processing_time": 2.1,
+      "confidence": 98.5,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4502", 
+      "overall_score": 72,
+      "percentage": 72.0,
+      "grade": "B",
+      "subjects": {"Python": 15, "EDA": 13, "SQL": 14, "Power_BI": 15, "Statistics": 15},
+      "processing_time": 1.9,
+      "confidence": 97.2,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4503",
+      "overall_score": 65,
+      "percentage": 65.0,
+      "grade": "C+",
+      "subjects": {"Python": 12, "EDA": 11, "SQL": 13, "Power_BI": 14, "Statistics": 15},
+      "processing_time": 2.3,
+      "confidence": 96.8,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4504",
+      "overall_score": 91,
+      "percentage": 91.0,
+      "grade": "A+",
+      "subjects": {"Python": 19, "EDA": 18, "SQL": 18, "Power_BI": 17, "Statistics": 19},
+      "processing_time": 1.8,
+      "confidence": 99.1,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4505",
+      "overall_score": 58,
+      "percentage": 58.0,
+      "grade": "C",
+      "subjects": {"Python": 10, "EDA": 12, "SQL": 11, "Power_BI": 13, "Statistics": 12},
+      "processing_time": 2.5,
+      "confidence": 95.3,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4506",
+      "overall_score": 52,
+      "percentage": 52.0,
+      "grade": "C+",
+      "subjects": {"Python": 12, "EDA": 8, "SQL": 11, "Power_BI": 6, "Statistics": 15},
+      "processing_time": 2.34,
+      "confidence": 94.7,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4507",
+      "overall_score": 79,
+      "percentage": 79.0,
+      "grade": "B+",
+      "subjects": {"Python": 16, "EDA": 15, "SQL": 16, "Power_BI": 15, "Statistics": 17},
+      "processing_time": 2.1,
+      "confidence": 98.0,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4508",
+      "overall_score": 83,
+      "percentage": 83.0,
+      "grade": "A-",
+      "subjects": {"Python": 17, "EDA": 16, "SQL": 17, "Power_BI": 16, "Statistics": 17},
+      "processing_time": 1.9,
+      "confidence": 97.8,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4509",
+      "overall_score": 45,
+      "percentage": 45.0,
+      "grade": "D+",
+      "subjects": {"Python": 8, "EDA": 9, "SQL": 10, "Power_BI": 9, "Statistics": 9},
+      "processing_time": 2.8,
+      "confidence": 93.2,
+      "status": "completed"
+    },
+    {
+      "student_id": "ST-4510",
+      "overall_score": 76,
+      "percentage": 76.0,
+      "grade": "B",
+      "subjects": {"Python": 15, "EDA": 14, "SQL": 15, "Power_BI": 16, "Statistics": 16},
+      "processing_time": 2.0,
+      "confidence": 97.5,
+      "status": "completed"
+    }
+  ],
+  "batch_statistics": {
+    "average_score": 73.8,
+    "median_score": 75.5,
+    "highest_score": 91,
+    "lowest_score": 45,
+    "pass_rate": 92.0,
+    "grade_distribution": {
+      "A+": 1,
+      "A": 1,
+      "A-": 1,
+      "B+": 1,
+      "B": 2,
+      "C+": 2,
+      "C": 1,
+      "D+": 1,
+      "F": 0
+    },
+    "subject_averages": {
+      "Python": 74.2,
+      "EDA": 68.6,
+      "SQL": 73.1,
+      "Power_BI": 71.9,
+      "Statistics": 77.3
+    },
+    "quality_metrics": {
+      "average_confidence": 96.8,
+      "average_processing_time": 2.15,
+      "manual_review_required": 3,
+      "anomalies_detected": 8
+    }
+  },
+  "processing_log": [
+    {"timestamp": "2025-09-21T10:35:00", "event": "Batch upload initiated", "sheets": 25},
+    {"timestamp": "2025-09-21T10:35:15", "event": "Image preprocessing started", "status": "in_progress"},
+    {"timestamp": "2025-09-21T10:36:30", "event": "Bubble detection completed", "accuracy": 99.2},
+    {"timestamp": "2025-09-21T10:37:45", "event": "Answer extraction completed", "confidence": 96.8},
+    {"timestamp": "2025-09-21T10:38:30", "event": "Quality validation completed", "issues": 3},
+    {"timestamp": "2025-09-21T10:38:45", "event": "Batch processing completed", "total_time": "3m 45s"}
+  ]
+}

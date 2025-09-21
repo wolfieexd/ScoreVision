@@ -1,0 +1,120 @@
+{
+  "id": "16bf5f63-b946-46e8-9f1d-dfefcd99b1ef",
+  "timestamp": "2025-09-21T01:07:01.696175",
+  "omr_file": "6fa6fce8-7e0a-4147-afa3-53ddc1e1be13_Img2.jpeg",
+  "answer_key_file": "98239d5f-577b-4928-b114-e18b0c75f5ee_answer_key_Set - A.json",
+  "result": {
+    "success": true,
+    "answers": {
+      "1": "B",
+      "2": "A",
+      "3": "E",
+      "4": "E",
+      "5": "C",
+      "6": "B",
+      "7": "B",
+      "8": "D",
+      "9": "E",
+      "10": "C",
+      "11": "F",
+      "12": "D",
+      "13": "D",
+      "14": "C",
+      "15": "E",
+      "16": "E",
+      "17": "F",
+      "18": "F",
+      "19": "C",
+      "20": "F",
+      "21": "E",
+      "22": "F",
+      "23": "C",
+      "24": "E",
+      "25": "E",
+      "26": "D",
+      "27": "A",
+      "28": "F"
+    },
+    "answer_mapping": {
+      "1": {
+        "answer": "B",
+        "confidence": 0.5153487361334508,
+        "position": [
+          145,
+          20
+        ],
+        "method": "contour",
+        "multiple_detected": 4,
+        "warning": "Multiple answers detected"
+      },
+      "2": {
+        "answer": "A",
+        "confidence": 0.531718917653085,
+        "position": [
+          74,
+          74
+        ],
+        "method": "contour",
+        "multiple_detected": 3,
+        "warning": "Multiple answers detected"
+      },
+      "3": {
+        "answer": "E",
+        "confidence": 0.542787880720322,
+        "position": [
+          946,
+          101
+        ],
+        "method": "contour",
+        "multiple_detected": 3,
+        "warning": "Multiple answers detected"
+      },
+      "4": {
+        "answer": "E",
+        "confidence": 0.8023177849597142,
+        "position": [
+          931,
+          146
+        ],
+        "method": "contour",
+        "multiple_detected": 4,
+        "warning": "Multiple answers detected"
+      },
+      "5": {
+        "answer": "C",
+        "confidence": 0.5801630303229978,
+        "position": [
+          401,
+          218
+        ],
+        "method": "contour",
+        "multiple_detected": 8,
+        "warning": "Multiple answers detected"
+      },
+      "6": {
+        "answer": "B",
+        "confidence": 0.5896955273080816,
+        "position": [
+          138,
+          269
+        ],
+        "method": "contour",
+        "multiple_detected": 10,
+        "warning": "Multiple answers detected"
+      },
+      "7": {
+        "answer": "B",
+        "confidence": 0.8080153167643012,
+        "position": [
+          137,
+          300
+        ],
+        "method": "contour",
+        "multiple_detected": 6,
+        "warning": "Multiple answers detected"
+      },
+      "8": {
+        "answer": "D",
+        "confidence": 0.79247154432072,
+        "position": [
+          

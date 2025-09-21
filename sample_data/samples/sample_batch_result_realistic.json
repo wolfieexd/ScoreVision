@@ -1,0 +1,398 @@
+{
+  "batch_info": {
+    "batch_id": "BATCH_20250921_143500",
+    "submitted_at": "2025-09-21T14:35:00.000Z",
+    "processed_at": "2025-09-21T14:37:45.234Z",
+    "total_sheets": 13,
+    "processed_sheets": 13,
+    "failed_sheets": 0,
+    "processing_time_seconds": 165.234,
+    "institution_id": "enterprise_client_001",
+    "assessment_type": "Multi-Subject Assessment",
+    "processing_node": "node_02"
+  },
+  "batch_settings": {
+    "max_workers": 4,
+    "quality_check": "high",
+    "auto_export": true,
+    "confidence_threshold": 0.85
+  },
+  "students_results": [
+    {
+      "student_id": "STU_001",
+      "image_file": "Img1.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 68,
+        "wrong_answers": 22,
+        "unattempted": 10,
+        "percentage": 68.0,
+        "grade": "B"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 16, "total": 20, "percentage": 80.0},
+        "DATA_ANALYSIS": {"correct": 12, "total": 20, "percentage": 60.0},
+        "MySQL": {"correct": 14, "total": 20, "percentage": 70.0},
+        "POWER_BI": {"correct": 13, "total": 20, "percentage": 65.0},
+        "ADV_STATS": {"correct": 13, "total": 20, "percentage": 65.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.94,
+        "image_quality": "excellent",
+        "alignment_score": 0.98
+      }
+    },
+    {
+      "student_id": "STU_002",
+      "image_file": "Img2.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 52,
+        "wrong_answers": 31,
+        "unattempted": 17,
+        "percentage": 52.0,
+        "grade": "C"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 12, "total": 20, "percentage": 60.0},
+        "DATA_ANALYSIS": {"correct": 8, "total": 20, "percentage": 40.0},
+        "MySQL": {"correct": 11, "total": 20, "percentage": 55.0},
+        "POWER_BI": {"correct": 6, "total": 20, "percentage": 30.0},
+        "ADV_STATS": {"correct": 15, "total": 20, "percentage": 75.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.91,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    },
+    {
+      "student_id": "STU_003",
+      "image_file": "Img3.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 75,
+        "wrong_answers": 18,
+        "unattempted": 7,
+        "percentage": 75.0,
+        "grade": "B+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 17, "total": 20, "percentage": 85.0},
+        "DATA_ANALYSIS": {"correct": 16, "total": 20, "percentage": 80.0},
+        "MySQL": {"correct": 15, "total": 20, "percentage": 75.0},
+        "POWER_BI": {"correct": 14, "total": 20, "percentage": 70.0},
+        "ADV_STATS": {"correct": 13, "total": 20, "percentage": 65.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.96,
+        "image_quality": "excellent",
+        "alignment_score": 0.99
+      }
+    },
+    {
+      "student_id": "STU_004",
+      "image_file": "Img4.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 84,
+        "wrong_answers": 12,
+        "unattempted": 4,
+        "percentage": 84.0,
+        "grade": "A"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 18, "total": 20, "percentage": 90.0},
+        "DATA_ANALYSIS": {"correct": 17, "total": 20, "percentage": 85.0},
+        "MySQL": {"correct": 16, "total": 20, "percentage": 80.0},
+        "POWER_BI": {"correct": 17, "total": 20, "percentage": 85.0},
+        "ADV_STATS": {"correct": 16, "total": 20, "percentage": 80.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.97,
+        "image_quality": "excellent",
+        "alignment_score": 0.98
+      }
+    },
+    {
+      "student_id": "STU_005",
+      "image_file": "Img5.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 61,
+        "wrong_answers": 25,
+        "unattempted": 14,
+        "percentage": 61.0,
+        "grade": "B"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 14, "total": 20, "percentage": 70.0},
+        "DATA_ANALYSIS": {"correct": 11, "total": 20, "percentage": 55.0},
+        "MySQL": {"correct": 13, "total": 20, "percentage": 65.0},
+        "POWER_BI": {"correct": 12, "total": 20, "percentage": 60.0},
+        "ADV_STATS": {"correct": 11, "total": 20, "percentage": 55.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.93,
+        "image_quality": "good",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_006",
+      "image_file": "Img6.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 79,
+        "wrong_answers": 15,
+        "unattempted": 6,
+        "percentage": 79.0,
+        "grade": "B+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 16, "total": 20, "percentage": 80.0},
+        "DATA_ANALYSIS": {"correct": 15, "total": 20, "percentage": 75.0},
+        "MySQL": {"correct": 17, "total": 20, "percentage": 85.0},
+        "POWER_BI": {"correct": 16, "total": 20, "percentage": 80.0},
+        "ADV_STATS": {"correct": 15, "total": 20, "percentage": 75.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.95,
+        "image_quality": "excellent",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_007",
+      "image_file": "Img7.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 57,
+        "wrong_answers": 28,
+        "unattempted": 15,
+        "percentage": 57.0,
+        "grade": "C+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 13, "total": 20, "percentage": 65.0},
+        "DATA_ANALYSIS": {"correct": 10, "total": 20, "percentage": 50.0},
+        "MySQL": {"correct": 12, "total": 20, "percentage": 60.0},
+        "POWER_BI": {"correct": 11, "total": 20, "percentage": 55.0},
+        "ADV_STATS": {"correct": 11, "total": 20, "percentage": 55.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.89,
+        "image_quality": "good",
+        "alignment_score": 0.94
+      }
+    },
+    {
+      "student_id": "STU_008",
+      "image_file": "Img8.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 92,
+        "wrong_answers": 6,
+        "unattempted": 2,
+        "percentage": 92.0,
+        "grade": "A+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 19, "total": 20, "percentage": 95.0},
+        "DATA_ANALYSIS": {"correct": 18, "total": 20, "percentage": 90.0},
+        "MySQL": {"correct": 19, "total": 20, "percentage": 95.0},
+        "POWER_BI": {"correct": 18, "total": 20, "percentage": 90.0},
+        "ADV_STATS": {"correct": 18, "total": 20, "percentage": 90.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.99,
+        "image_quality": "excellent",
+        "alignment_score": 0.99
+      }
+    },
+    {
+      "student_id": "STU_009",
+      "image_file": "Img16.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 66,
+        "wrong_answers": 24,
+        "unattempted": 10,
+        "percentage": 66.0,
+        "grade": "B"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 15, "total": 20, "percentage": 75.0},
+        "DATA_ANALYSIS": {"correct": 12, "total": 20, "percentage": 60.0},
+        "MySQL": {"correct": 14, "total": 20, "percentage": 70.0},
+        "POWER_BI": {"correct": 13, "total": 20, "percentage": 65.0},
+        "ADV_STATS": {"correct": 12, "total": 20, "percentage": 60.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.92,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    },
+    {
+      "student_id": "STU_010",
+      "image_file": "Img17.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 73,
+        "wrong_answers": 19,
+        "unattempted": 8,
+        "percentage": 73.0,
+        "grade": "B+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 16, "total": 20, "percentage": 80.0},
+        "DATA_ANALYSIS": {"correct": 15, "total": 20, "percentage": 75.0},
+        "MySQL": {"correct": 14, "total": 20, "percentage": 70.0},
+        "POWER_BI": {"correct": 14, "total": 20, "percentage": 70.0},
+        "ADV_STATS": {"correct": 14, "total": 20, "percentage": 70.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.94,
+        "image_quality": "excellent",
+        "alignment_score": 0.97
+      }
+    },
+    {
+      "student_id": "STU_011",
+      "image_file": "Img18.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 58,
+        "wrong_answers": 30,
+        "unattempted": 12,
+        "percentage": 58.0,
+        "grade": "C+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 12, "total": 20, "percentage": 60.0},
+        "DATA_ANALYSIS": {"correct": 11, "total": 20, "percentage": 55.0},
+        "MySQL": {"correct": 13, "total": 20, "percentage": 65.0},
+        "POWER_BI": {"correct": 10, "total": 20, "percentage": 50.0},
+        "ADV_STATS": {"correct": 12, "total": 20, "percentage": 60.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.90,
+        "image_quality": "good",
+        "alignment_score": 0.95
+      }
+    },
+    {
+      "student_id": "STU_012",
+      "image_file": "Img19.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 87,
+        "wrong_answers": 9,
+        "unattempted": 4,
+        "percentage": 87.0,
+        "grade": "A"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 18, "total": 20, "percentage": 90.0},
+        "DATA_ANALYSIS": {"correct": 17, "total": 20, "percentage": 85.0},
+        "MySQL": {"correct": 17, "total": 20, "percentage": 85.0},
+        "POWER_BI": {"correct": 18, "total": 20, "percentage": 90.0},
+        "ADV_STATS": {"correct": 17, "total": 20, "percentage": 85.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.98,
+        "image_quality": "excellent",
+        "alignment_score": 0.98
+      }
+    },
+    {
+      "student_id": "STU_013",
+      "image_file": "Img20.jpeg",
+      "paper_set": "Set A",
+      "processing_status": "completed",
+      "overall_score": {
+        "total_questions": 100,
+        "correct_answers": 71,
+        "wrong_answers": 21,
+        "unattempted": 8,
+        "percentage": 71.0,
+        "grade": "B+"
+      },
+      "subject_scores": {
+        "PYTHON": {"correct": 15, "total": 20, "percentage": 75.0},
+        "DATA_ANALYSIS": {"correct": 14, "total": 20, "percentage": 70.0},
+        "MySQL": {"correct": 15, "total": 20, "percentage": 75.0},
+        "POWER_BI": {"correct": 14, "total": 20, "percentage": 70.0},
+        "ADV_STATS": {"correct": 13, "total": 20, "percentage": 65.0}
+      },
+      "quality_metrics": {
+        "detection_confidence": 0.93,
+        "image_quality": "good",
+        "alignment_score": 0.96
+      }
+    }
+  ],
+  "batch_statistics": {
+    "average_score": 69.5,
+    "median_score": 68.0,
+    "highest_score": 92.0,
+    "lowest_score": 52.0,
+    "pass_rate": 100.0,
+    "grade_distribution": {
+      "A+": 1,
+      "A": 2,
+      "B+": 4,
+      "B": 3,
+      "C+": 2,
+      "C": 1,
+      "D+": 0,
+      "D": 0,
+      "F": 0
+    },
+    "subject_averages": {
+      "PYTHON": 76.5,
+      "DATA_ANALYSIS": 67.7,
+      "MySQL": 71.9,
+      "POWER_BI": 67.7,
+      "ADV_STATS": 66.9
+    }
+  },
+  "quality_summary": {
+    "average_confidence": 0.94,
+    "images_excellent_quality": 8,
+    "images_good_quality": 5,
+    "images_poor_quality": 0,
+    "processing_accuracy": 99.8
+  },
+  "export_info": {
+    "csv_file": "batch_results_20250921_143745.csv",
+    "excel_file": "batch_results_20250921_143745.xlsx",
+    "pdf_report": "batch_summary_20250921_143745.pdf",
+    "generated_at": "2025-09-21T14:37:50.123Z"
+  }
+}

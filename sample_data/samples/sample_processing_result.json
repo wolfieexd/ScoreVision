@@ -1,0 +1,154 @@
+{
+  "assessment_details": {
+    "student_id": "ST-4506",
+    "set_number": "A",
+    "exam_type": "Multi-Subject Assessment",
+    "subjects": ["Python", "EDA", "SQL", "Power BI", "Statistics"],
+    "total_questions": 100,
+    "exam_date": "2025-09-21",
+    "processing_timestamp": "2025-09-21T10:30:15.234Z"
+  },
+  "answer_key": {
+    "Python": {
+      "1": "a", "2": "c", "3": "c", "4": "c", "5": "c", "6": "a", "7": "c", "8": "c", "9": "b", "10": "c",
+      "11": "a", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a,b,c,d", "17": "c", "18": "d", "19": "a", "20": "b"
+    },
+    "EDA": {
+      "21": "a", "22": "d", "23": "b", "24": "a", "25": "c", "26": "b", "27": "a", "28": "b", "29": "d", "30": "c",
+      "31": "c", "32": "a", "33": "b", "34": "c", "35": "a", "36": "b", "37": "d", "38": "b", "39": "a", "40": "b"
+    },
+    "SQL": {
+      "41": "c", "42": "c", "43": "c", "44": "b", "45": "b", "46": "a", "47": "c", "48": "b", "49": "d", "50": "a",
+      "51": "c", "52": "b", "53": "c", "54": "c", "55": "a", "56": "b", "57": "b", "58": "a", "59": "a,b", "60": "b"
+    },
+    "Power_BI": {
+      "61": "b", "62": "c", "63": "a", "64": "b", "65": "c", "66": "b", "67": "b", "68": "c", "69": "c", "70": "b",
+      "71": "b", "72": "b", "73": "d", "74": "b", "75": "a", "76": "b", "77": "b", "78": "b", "79": "b", "80": "b"
+    },
+    "Statistics": {
+      "81": "a", "82": "b", "83": "c", "84": "b", "85": "c", "86": "b", "87": "b", "88": "b", "89": "a", "90": "b",
+      "91": "c", "92": "b", "93": "c", "94": "b", "95": "b", "96": "b", "97": "c", "98": "a", "99": "b", "100": "c"
+    }
+  },
+  "student_responses": {
+    "Python": {
+      "1": "a", "2": "a", "3": "b", "4": "d", "5": "a", "6": "a", "7": "c", "8": "c", "9": "b", "10": "a",
+      "11": "d", "12": "a", "13": "d", "14": "a", "15": "b", "16": "a", "17": "c", "18": "d", "19": "a", "20": "b"
+    },
+    "EDA": {
+      "21": "a", "22": "d", "23": "a", "24": "a", "25": "d", "26": "c", "27": "a", "28": "a", "29": "d", "30": "d",
+      "31": "c", "32": "a", "33": "a", "34": "d", "35": "d", "36": "d", "37": "a", "38": "a", "39": "d", "40": "d"
+    },
+    "SQL": {
+      "41": "a", "42": "c", "43": "c", "44": "c", "45": "c", "46": "a", "47": "a", "48": "a", "49": "c", "50": "d",
+      "51": "a", "52": "c", "53": "c", "54": "a", "55": "a", "56": "a", "57": "a", "58": "a", "59": "a", "60": "c"
+    },
+    "Power_BI": {
+      "61": "c", "62": "a", "63": "a", "64": "c", "65": "c", "66": "d", "67": "a", "68": "d", "69": "a", "70": "a",
+      "71": "a", "72": "a", "73": "c", "74": "a", "75": "a", "76": "a", "77": "a", "78": "c", "79": "a", "80": "a"
+    },
+    "Statistics": {
+      "81": "a", "82": "a", "83": "a", "84": "a", "85": "d", "86": "a", "87": "a", "88": "a", "89": "a", "90": "d",
+      "91": "c", "92": "c", "93": "a", "94": "c", "95": "a", "96": "a", "97": "a", "98": "a", "99": "a", "100": "a"
+    }
+  },
+  "processing_results": {
+    "overall_score": {
+      "correct_answers": 52,
+      "incorrect_answers": 46,
+      "unanswered": 2,
+      "total_questions": 100,
+      "percentage": 52.0,
+      "grade": "C+",
+      "pass_status": "Pass"
+    },
+    "subject_wise_scores": {
+      "Python": {
+        "correct": 12,
+        "incorrect": 7,
+        "unanswered": 1,
+        "total": 20,
+        "percentage": 60.0,
+        "grade": "B-"
+      },
+      "EDA": {
+        "correct": 8,
+        "incorrect": 12,
+        "unanswered": 0,
+        "total": 20,
+        "percentage": 40.0,
+        "grade": "D+"
+      },
+      "SQL": {
+        "correct": 11,
+        "incorrect": 9,
+        "unanswered": 0,
+        "total": 20,
+        "percentage": 55.0,
+        "grade": "C+"
+      },
+      "Power_BI": {
+        "correct": 6,
+        "incorrect": 14,
+        "unanswered": 0,
+        "total": 20,
+        "percentage": 30.0,
+        "grade": "F"
+      },
+      "Statistics": {
+        "correct": 15,
+        "incorrect": 4,
+        "unanswered": 1,
+        "total": 20,
+        "percentage": 75.0,
+        "grade": "A-"
+      }
+    },
+    "quality_metrics": {
+      "confidence_score": 94.7,
+      "bubble_detection_accuracy": 99.2,
+      "image_quality_score": 87.5,
+      "processing_time": 2.34,
+      "anomalies_detected": 3,
+      "manual_review_required": ["Q16", "Q59", "Q85"]
+    },
+    "detailed_analysis": {
+      "question_confidence": {
+        "high_confidence": 92,
+        "medium_confidence": 5,
+        "low_confidence": 3
+      },
+      "error_analysis": {
+        "smudged_responses": 2,
+        "multiple_marks": 1,
+        "faint_marks": 3,
+        "alignment_issues": 0
+      },
+      "recommendations": [
+        "Review questions 16, 59, and 85 for multiple marks",
+        "Student may benefit from additional study in Power BI concepts",
+        "Strong performance in Statistics indicates good analytical skills",
+        "Consider providing extra practice materials for EDA"
+      ]
+    }
+  },
+  "visual_analysis": {
+    "detected_regions": {
+      "header_info": {"x": 45, "y": 120, "width": 400, "height": 80, "confidence": 0.98},
+      "answer_grid": {"x": 50, "y": 280, "width": 750, "height": 520, "confidence": 0.99},
+      "student_signature": {"x": 60, "y": 190, "width": 200, "height": 40, "confidence": 0.89}
+    },
+    "bubble_analysis": {
+      "total_bubbles_detected": 500,
+      "filled_bubbles": 98,
+      "partially_filled": 5,
+      "unfilled": 397,
+      "detection_accuracy": 99.2
+    }
+  },
+  "export_data": {
+    "csv_summary": "Student ID,Subject,Score,Percentage,Grade\\nST-4506,Python,12/20,60.0%,B-\\nST-4506,EDA,8/20,40.0%,D+\\nST-4506,SQL,11/20,55.0%,C+\\nST-4506,Power BI,6/20,30.0%,F\\nST-4506,Statistics,15/20,75.0%,A-",
+    "pdf_report_generated": true,
+    "detailed_report_path": "/reports/ST-4506_assessment_2025-09-21.pdf"
+  }
+}

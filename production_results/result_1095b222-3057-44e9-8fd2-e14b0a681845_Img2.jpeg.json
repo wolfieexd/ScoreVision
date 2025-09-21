@@ -1,0 +1,1695 @@
+{
+  "success": true,
+  "answers": {
+    "1": "A",
+    "2": "A",
+    "4": "C",
+    "8": "D",
+    "9": "F",
+    "10": "E",
+    "11": "B",
+    "12": "A",
+    "13": "D",
+    "14": "F",
+    "16": "F",
+    "17": "C",
+    "20": "F"
+  },
+  "answer_mapping": {
+    "1": {
+      "answer": "A",
+      "confidence": 0.7943414953023283,
+      "position": [
+        "136",
+        "300"
+      ],
+      "method": "hough",
+      "multiple_detected": 4,
+      "warning": "Multiple answers detected"
+    },
+    "2": {
+      "answer": "A",
+      "confidence": 0.7976491570357148,
+      "position": [
+        "136",
+        "334"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "4": {
+      "answer": "C",
+      "confidence": 0.8186316449469004,
+      "position": [
+        "334",
+        "396"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "8": {
+      "answer": "D",
+      "confidence": 0.8023369068678223,
+      "position": [
+        "368",
+        "562"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "9": {
+      "answer": "F",
+      "confidence": 0.8217762346355281,
+      "position": [
+        "632",
+        "592"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "10": {
+      "answer": "E",
+      "confidence": 0.8122667775040182,
+      "position": [
+        "434",
+        "630"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "11": {
+      "answer": "B",
+      "confidence": 0.8138755913388942,
+      "position": [
+        "200",
+        "704"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "12": {
+      "answer": "A",
+      "confidence": 0.8177250325540231,
+      "position": [
+        "166",
+        "738"
+      ],
+      "method": "hough",
+      "multiple_detected": 4,
+      "warning": "Multiple answers detected"
+    },
+    "13": {
+      "answer": "D",
+      "confidence": 0.8134171506425689,
+      "position": [
+        "368",
+        "770"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "14": {
+      "answer": "F",
+      "confidence": 0.8341050687194561,
+      "position": [
+        "570",
+        "800"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "16": {
+      "answer": "F",
+      "confidence": 0.8388039339699618,
+      "position": [
+        "570",
+        "908"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    },
+    "17": {
+      "answer": "C",
+      "confidence": 0.8292055942512587,
+      "position": [
+        "334",
+        "948"
+      ],
+      "method": "hough",
+      "multiple_detected": 6,
+      "warning": "Multiple answers detected"
+    },
+    "20": {
+      "answer": "F",
+      "confidence": 0.8431445712058891,
+      "position": [
+        "538",
+        "1050"
+      ],
+      "method": "hough",
+      "multiple_detected": 5,
+      "warning": "Multiple answers detected"
+    }
+  },
+  "detection_details": {
+    "total_candidates": 490,
+    "marked_bubbles": 96,
+    "questions_detected": 13,
+    "confidence_scores": {
+      "overall": 0.791279879161752,
+      "average": 0.791279879161752,
+      "min": 0.6100494818455926,
+      "max": 0.8431445712058891,
+      "std": 0.03748608288829041,
+      "distribution": {
+        "high_confidence": 44,
+        "medium_confidence": 52,
+        "low_confidence": 0
+      }
+    },
+    "processing_time": 3.233449935913086
+  },
+  "quality_metrics": {
+    "score": 0.562399415502897,
+    "components": {
+      "detection_selectivity": 0.19591836734693877,
+      "grid_consistency": 0.7,
+      "confidence": 0.791279879161752
+    },
+    "issues": [
+      "Irregular grid pattern detected"
+    ],
+    "recommendations": [
+      "Check image alignment and perspective correction",
+      "Adjust bubble size parameters or thresholds"
+    ]
+  },
+  "grid_analysis": {
+    "rows": 20,
+    "cols": 8,
+    "grid": [
+      [
+        {
+          "center": [
+            "136",
+            "300"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8271308523409363,
+          "consistency_score": 0.9176521274143975,
+          "edge_score": 0.5274021545377043,
+          "marking_score": 0.7943414953023283,
+          "avg_intensity": 44.08163265306123,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "592",
+            "296"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.694546268752199,
+          "consistency_score": 0.7550015529340167,
+          "edge_score": 0.5706939691962571,
+          "marking_score": 0.6879123940955559,
+          "avg_intensity": 77.89070146818923,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "754",
+            "294"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.810750967053488,
+          "consistency_score": 0.9219419916520709,
+          "edge_score": 0.5295799426489964,
+          "marking_score": 0.7878740695521647,
+          "avg_intensity": 48.25850340136054,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "946",
+            "296"
+          ],
+          "radius": "15",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.6160845156116044,
+          "consistency_score": 0.7278027547276418,
+          "edge_score": 0.41833198810748956,
+          "marking_score": 0.6100494818455926,
+          "avg_intensity": 97.8984485190409,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "136",
+            "334"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8277444311057756,
+          "consistency_score": 0.9231935405081294,
+          "edge_score": 0.5340943966519414,
+          "marking_score": 0.7976491570357148,
+          "avg_intensity": 43.925170068027214,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "432",
+            "330"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8101640656262505,
+          "consistency_score": 0.9241198970619952,
+          "edge_score": 0.5435146865070138,
+          "marking_score": 0.7910209392331267,
+          "avg_intensity": 48.40816326530612,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "530",
+            "328"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8244542261348984,
+          "consistency_score": 0.9163812556677545,
+          "edge_score": 0.5497116949546617,
+          "marking_score": 0.7970838287587079,
+          "avg_intensity": 44.764172335600904,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "788",
+            "326"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8104308390022675,
+          "consistency_score": 0.9134770656025439,
+          "edge_score": 0.5471006742617996,
+          "marking_score": 0.7886786740342568,
+          "avg_intensity": 48.34013605442177,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "950",
+            "326"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8169223244853496,
+          "consistency_score": 0.9070580922114219,
+          "edge_score": 0.509149810121677,
+          "marking_score": 0.7824085519304369,
+          "avg_intensity": 46.68480725623583,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "170",
+            "366"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7773898217131843,
+          "consistency_score": 0.8439670439094676,
+          "edge_score": 0.5851947640254841,
+          "marking_score": 0.7589239768345293,
+          "avg_intensity": 56.765595463138,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "366",
+            "362"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8077897825796986,
+          "consistency_score": 0.8628438500835612,
+          "edge_score": 0.4929900023250407,
+          "marking_score": 0.7613460467799257,
+          "avg_intensity": 49.01360544217687,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "528",
+            "362"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.694802162300483,
+          "consistency_score": 0.7609018374279987,
+          "edge_score": 0.5294592592861379,
+          "marking_score": 0.6815634842358687,
+          "avg_intensity": 77.82544861337684,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "918",
+            "358"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7799844323362615,
+          "consistency_score": 0.8558553534494424,
+          "edge_score": 0.5889876755118452,
+          "marking_score": 0.7645463573053324,
+          "avg_intensity": 56.103969754253306,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "236",
+            "398"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7880351384410097,
+          "consistency_score": 0.829520749995577,
+          "edge_score": 0.6063710284324034,
+          "marking_score": 0.7641479999056587,
+          "avg_intensity": 54.051039697542535,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "334",
+            "396"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8489973767284692,
+          "consistency_score": 0.9419554984076414,
+          "edge_score": 0.5577315353018677,
+          "marking_score": 0.8186316449469004,
+          "avg_intensity": 38.50566893424036,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "532",
+            "392"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.6885007836739916,
+          "consistency_score": 0.7516332127160243,
+          "edge_score": 0.5316683015607494,
+          "marking_score": 0.6760740159639529,
+          "avg_intensity": 79.43230016313214,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "758",
+            "392"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8004373772193187,
+          "consistency_score": 0.8547004003937881,
+          "edge_score": 0.5666254819488258,
+          "marking_score": 0.769953905117561,
+          "avg_intensity": 50.88846880907372,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1016",
+            "390"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7666851995996886,
+          "consistency_score": 0.8302702753226096,
+          "edge_score": 0.6077346085647719,
+          "marking_score": 0.7539706041095815,
+          "avg_intensity": 59.49527410207939,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "168",
+            "432"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.80765639589169,
+          "consistency_score": 0.9023026725125666,
+          "edge_score": 0.5220243354258699,
+          "marking_score": 0.7789238667847891,
+          "avg_intensity": 49.04761904761905,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "334",
+            "430"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7916379406204826,
+          "consistency_score": 0.8253329670989873,
+          "edge_score": 0.592574611863673,
+          "marking_score": 0.7619337828126722,
+          "avg_intensity": 53.13232514177694,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "564",
+            "426"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8277977857809791,
+          "consistency_score": 0.9127073405863433,
+          "edge_score": 0.5322273889793071,
+          "marking_score": 0.7941565728622539,
+          "avg_intensity": 43.91156462585034,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "790",
+            "424"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8268462940731849,
+          "consistency_score": 0.9211890571161901,
+          "edge_score": 0.5549174610555684,
+          "marking_score": 0.8007633563825631,
+          "avg_intensity": 44.15419501133787,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1018",
+            "422"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8342714863723267,
+          "consistency_score": 0.9461669600059126,
+          "edge_score": 0.5665132139812447,
+          "marking_score": 0.814288473984186,
+          "avg_intensity": 42.26077097505669,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "168",
+            "498"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7927869824678454,
+          "consistency_score": 0.8630383012178969,
+          "edge_score": 0.5700465454320529,
+          "marking_score": 0.7693142906857023,
+          "avg_intensity": 52.83931947069943,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "400",
+            "494"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8235649815481748,
+          "consistency_score": 0.894769963691982,
+          "edge_score": 0.5211129194760908,
+          "marking_score": 0.7844360637769002,
+          "avg_intensity": 44.99092970521542,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "532",
+            "492"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7813484562066793,
+          "consistency_score": 0.8341817025365601,
+          "edge_score": 0.5674792014597637,
+          "marking_score": 0.7544245791562605,
+          "avg_intensity": 55.75614366729678,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "824",
+            "490"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8361744697879152,
+          "consistency_score": 0.9151662174305027,
+          "edge_score": 0.5409005657599008,
+          "marking_score": 0.8008172132750886,
+          "avg_intensity": 41.775510204081634,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "956",
+            "488"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.820328131252501,
+          "consistency_score": 0.8964704598255958,
+          "edge_score": 0.5207990389831821,
+          "marking_score": 0.7832650113705657,
+          "avg_intensity": 45.816326530612244,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "368",
+            "528"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8316748921790937,
+          "consistency_score": 0.9042941169802972,
+          "edge_score": 0.5339750445632798,
+          "marking_score": 0.7939206900962918,
+          "avg_intensity": 42.92290249433107,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "566",
+            "526"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8112013047184847,
+          "consistency_score": 0.8434740743821535,
+          "edge_score": 0.5983104214346096,
+          "marking_score": 0.7783049589608103,
+          "avg_intensity": 48.14366729678639,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "826",
+            "522"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8252367613712152,
+          "consistency_score": 0.9163643809744634,
+          "edge_score": 0.5218267069673719,
+          "marking_score": 0.7918930363714209,
+          "avg_intensity": 44.564625850340136,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "990",
+            "522"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8457694188786625,
+          "consistency_score": 0.9274656245408833,
+          "edge_score": 0.549265287142525,
+          "marking_score": 0.8109774542301014,
+          "avg_intensity": 39.32879818594105,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "200",
+            "566"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7974128025501316,
+          "consistency_score": 0.8509840254009574,
+          "edge_score": 0.5634655986474506,
+          "marking_score": 0.7666947286248432,
+          "avg_intensity": 51.65973534971645,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "368",
+            "562"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.830119722747322,
+          "consistency_score": 0.8857127504939639,
+          "edge_score": 0.6078161017298613,
+          "marking_score": 0.8023369068678223,
+          "avg_intensity": 43.31947069943289,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "566",
+            "560"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7853219170465917,
+          "consistency_score": 0.8088447076699861,
+          "edge_score": 0.5973925537617781,
+          "marking_score": 0.7547928815766473,
+          "avg_intensity": 54.742911153119096,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "794",
+            "556"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8428971588635454,
+          "consistency_score": 0.9191249593913337,
+          "edge_score": 0.5237030148027589,
+          "marking_score": 0.8019266702097245,
+          "avg_intensity": 40.06122448979592,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "958",
+            "556"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7838763482708773,
+          "consistency_score": 0.8330382737819619,
+          "edge_score": 0.6002450980392157,
+          "marking_score": 0.7618986758778703,
+          "avg_intensity": 55.11153119092628,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "234",
+            "600"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8342892712640612,
+          "consistency_score": 0.9096441835386929,
+          "edge_score": 0.508684026970472,
+          "marking_score": 0.7917746960877328,
+          "avg_intensity": 42.2562358276644,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "434",
+            "594"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8521719799030723,
+          "consistency_score": 0.9217481750460237,
+          "edge_score": 0.4921886383011703,
+          "marking_score": 0.8010481701255773,
+          "avg_intensity": 37.69614512471655,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "632",
+            "592"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8592503668133921,
+          "consistency_score": 0.9388346415576787,
+          "edge_score": 0.5525032938076416,
+          "marking_score": 0.8217762346355281,
+          "avg_intensity": 35.89115646258504,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "796",
+            "590"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8114459394343749,
+          "consistency_score": 0.8476405805705041,
+          "edge_score": 0.6067101966969753,
+          "marking_score": 0.7813571832277337,
+          "avg_intensity": 48.0812854442344,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "926",
+            "590"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7827495459431411,
+          "consistency_score": 0.8256996740377407,
+          "edge_score": 0.5997264489391971,
+          "marking_score": 0.7590299649707322,
+          "avg_intensity": 55.39886578449905,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "132",
+            "634"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8053300715371214,
+          "consistency_score": 0.8249682639136301,
+          "edge_score": 0.5525776788107462,
+          "marking_score": 0.7606710507047989,
+          "avg_intensity": 49.640831758034025,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "434",
+            "630"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8501889644746787,
+          "consistency_score": 0.9442068061241461,
+          "edge_score": 0.519551267147175,
+          "marking_score": 0.8122667775040182,
+          "avg_intensity": 38.20181405895691,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "598",
+            "626"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8328848363542014,
+          "consistency_score": 0.8472607918535078,
+          "edge_score": 0.5846544658873013,
+          "marking_score": 0.7875515489106134,
+          "avg_intensity": 42.614366729678636,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "764",
+            "624"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.809592646132177,
+          "consistency_score": 0.8440904536168379,
+          "edge_score": 0.6000499989690935,
+          "marking_score": 0.7780334589449585,
+          "avg_intensity": 48.55387523629489,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1028",
+            "622"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.816220022980837,
+          "consistency_score": 0.8555357487201569,
+          "edge_score": 0.5994216356363786,
+          "marking_score": 0.7846550632337412,
+          "avg_intensity": 46.863894139886575,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "200",
+            "704"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8599058527002483,
+          "consistency_score": 0.8892305605121774,
+          "edge_score": 0.5857674841755841,
+          "marking_score": 0.8138755913388942,
+          "avg_intensity": 35.72400756143667,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "402",
+            "700"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8561735805433284,
+          "consistency_score": 0.9151370665365202,
+          "edge_score": 0.5020568859955048,
+          "marking_score": 0.8030392874317213,
+          "avg_intensity": 36.67573696145125,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "536",
+            "698"
+          ],
+          "radius": "15",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7180563621781576,
+          "consistency_score": 0.7366784283385435,
+          "edge_score": 0.5641791834333084,
+          "marking_score": 0.6928675462773035,
+          "avg_intensity": 71.89562764456981,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "766",
+            "694"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8515139389088969,
+          "consistency_score": 0.9260183988976143,
+          "edge_score": 0.46332558319770595,
+          "marking_score": 0.796227605763274,
+          "avg_intensity": 37.863945578231295,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "996",
+            "692"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.829416210928816,
+          "consistency_score": 0.9008714207070361,
+          "edge_score": 0.521374874060296,
+          "marking_score": 0.789244506488578,
+          "avg_intensity": 43.49886621315193,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "166",
+            "738"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8786447912498332,
+          "consistency_score": 0.9423320737544917,
+          "edge_score": 0.4785150740137953,
+          "marking_score": 0.8177250325540231,
+          "avg_intensity": 30.94557823129252,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "334",
+            "734"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8164498313503095,
+          "consistency_score": 0.8637685485828784,
+          "edge_score": 0.5450838127048927,
+          "marking_score": 0.7763722427909968,
+          "avg_intensity": 46.805293005671075,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "766",
+            "728"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.83989028503651,
+          "consistency_score": 0.8556185660264775,
+          "edge_score": 0.6072341034205481,
+          "marking_score": 0.7980775330103078,
+          "avg_intensity": 40.82797731568998,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1032",
+            "724"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8578631452581033,
+          "consistency_score": 0.9284511119889236,
+          "edge_score": 0.539775246066806,
+          "marking_score": 0.8154219554390899,
+          "avg_intensity": 36.244897959183675,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "232",
+            "772"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8392972311798065,
+          "consistency_score": 0.8677120131967662,
+          "edge_score": 0.5948804921548009,
+          "marking_score": 0.7989383179798932,
+          "avg_intensity": 40.97920604914934,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "368",
+            "770"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8565625115830832,
+          "consistency_score": 0.887859428064691,
+          "edge_score": 0.5938903321580998,
+          "marking_score": 0.8134171506425689,
+          "avg_intensity": 36.5765595463138,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "602",
+            "766"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8397716742651692,
+          "consistency_score": 0.8697403661364941,
+          "edge_score": 0.5811726304612276,
+          "marking_score": 0.7970424730657784,
+          "avg_intensity": 40.85822306238185,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "834",
+            "762"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8647014361300076,
+          "consistency_score": 0.9130767096275111,
+          "edge_score": 0.510020925366194,
+          "marking_score": 0.808277916026496,
+          "avg_intensity": 34.50113378684807,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1000",
+            "760"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8346565847511028,
+          "consistency_score": 0.8734321060270867,
+          "edge_score": 0.6110883538483743,
+          "marking_score": 0.8015755949533523,
+          "avg_intensity": 42.16257088846881,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "164",
+            "810"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.872893732162052,
+          "consistency_score": 0.903942159398847,
+          "edge_score": 0.5785833281788005,
+          "marking_score": 0.8233461795364402,
+          "avg_intensity": 32.412098298676746,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "400",
+            "804"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8251991171672584,
+          "consistency_score": 0.8086863763458687,
+          "edge_score": 0.6071542037743273,
+          "marking_score": 0.7766363122422553,
+          "avg_intensity": 44.574225122349105,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "570",
+            "800"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8951136009959539,
+          "consistency_score": 0.9596156720302114,
+          "edge_score": 0.4933178330620786,
+          "marking_score": 0.8341050687194561,
+          "avg_intensity": 26.746031746031747,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "770",
+            "798"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7918825753363726,
+          "consistency_score": 0.8148739238287928,
+          "edge_score": 0.5579696037195109,
+          "marking_score": 0.7519973855607264,
+          "avg_intensity": 53.06994328922495,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1032",
+            "794"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8621668705289299,
+          "consistency_score": 0.8895929655779169,
+          "edge_score": 0.5786821148017567,
+          "marking_score": 0.8136977478981914,
+          "avg_intensity": 35.147448015122876,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "402",
+            "840"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8811880307678628,
+          "consistency_score": 0.931052194027028,
+          "edge_score": 0.5003774316050531,
+          "marking_score": 0.8199851599130504,
+          "avg_intensity": 30.29705215419501,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "536",
+            "836"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8743408474500912,
+          "consistency_score": 0.9412562064561479,
+          "edge_score": 0.49609393164380367,
+          "marking_score": 0.8187660719906507,
+          "avg_intensity": 32.043083900226755,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "736",
+            "834"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8479335779680491,
+          "consistency_score": 0.8573993854642961,
+          "edge_score": 0.5925919568668687,
+          "marking_score": 0.7997049959966871,
+          "avg_intensity": 38.77693761814745,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "936",
+            "830"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8629007746766003,
+          "consistency_score": 0.9020202313221233,
+          "edge_score": 0.5904376456155543,
+          "marking_score": 0.8201439858580479,
+          "avg_intensity": 34.960302457466916,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "164",
+            "916"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8835800987061491,
+          "consistency_score": 0.9463779674422286,
+          "edge_score": 0.5127838487173525,
+          "marking_score": 0.8282602093292136,
+          "avg_intensity": 29.687074829931973,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "436",
+            "910"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8760813966418326,
+          "consistency_score": 0.9155252710724915,
+          "edge_score": 0.5712429640625967,
+          "marking_score": 0.8269468724551831,
+          "avg_intensity": 31.599243856332702,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "570",
+            "908"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.9009114757013916,
+          "consistency_score": 0.9488606718145367,
+          "edge_score": 0.5184499728745252,
+          "marking_score": 0.8388039339699618,
+          "avg_intensity": 25.267573696145124,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "770",
+            "902"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8541828829830609,
+          "consistency_score": 0.8723551741313877,
+          "edge_score": 0.5690213861569864,
+          "marking_score": 0.802602270962344,
+          "avg_intensity": 37.183364839319474,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "972",
+            "898"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.829474776678157,
+          "consistency_score": 0.8389269119944734,
+          "edge_score": 0.6303041174408776,
+          "marking_score": 0.792476285425596,
+          "avg_intensity": 43.48393194706994,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "198",
+            "950"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8630267986211497,
+          "consistency_score": 0.9075686245855137,
+          "edge_score": 0.6103342714583204,
+          "marking_score": 0.8258508409778931,
+          "avg_intensity": 34.928166351606805,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "334",
+            "948"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8859277044150994,
+          "consistency_score": 0.9542032079335495,
+          "edge_score": 0.49990389831822063,
+          "marking_score": 0.8292055942512587,
+          "avg_intensity": 29.08843537414966,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "402",
+            "946"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8797509173801846,
+          "consistency_score": 0.9223059779766271,
+          "edge_score": 0.5368201686563163,
+          "marking_score": 0.8239312858143436,
+          "avg_intensity": 30.66351606805293,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "572",
+            "942"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8501945957967307,
+          "consistency_score": 0.8569400955571647,
+          "edge_score": 0.575358729716913,
+          "marking_score": 0.7972510725088974,
+          "avg_intensity": 38.20037807183365,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "772",
+            "938"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8871370770530435,
+          "consistency_score": 0.9464577423425007,
+          "edge_score": 0.5047027822986903,
+          "marking_score": 0.8284464176890101,
+          "avg_intensity": 28.780045351473923,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1006",
+            "934"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8397271952259164,
+          "consistency_score": 0.8725488200225668,
+          "edge_score": 0.6011285334323004,
+          "marking_score": 0.8018539503061883,
+          "avg_intensity": 40.869565217391305,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "232",
+            "984"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.7888750279883568,
+          "consistency_score": 0.8151698557059323,
+          "edge_score": 0.6028105663748855,
+          "marking_score": 0.7595505839809352,
+          "avg_intensity": 53.83686786296901,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "368",
+            "982"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8492457096260054,
+          "consistency_score": 0.8726354703903527,
+          "edge_score": 0.552260236902332,
+          "marking_score": 0.7968655433105749,
+          "avg_intensity": 38.44234404536862,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "536",
+            "978"
+          ],
+          "radius": "14",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8026932795956883,
+          "consistency_score": 0.7887456904340259,
+          "edge_score": 0.5948346216943793,
+          "marking_score": 0.7569372712669278,
+          "avg_intensity": 50.313213703099514,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "806",
+            "972"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8841492152416522,
+          "consistency_score": 0.9431761423165042,
+          "edge_score": 0.533924668681702,
+          "marking_score": 0.8318123840521179,
+          "avg_intensity": 29.541950113378686,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "940",
+            "968"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8969899070739407,
+          "consistency_score": 0.9551819069782657,
+          "edge_score": 0.5217205301092769,
+          "marking_score": 0.8393936316523054,
+          "avg_intensity": 26.267573696145124,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "232",
+            "1020"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8855897914721444,
+          "consistency_score": 0.9321602898786365,
+          "edge_score": 0.5233635588622801,
+          "marking_score": 0.8271156944721193,
+          "avg_intensity": 29.174603174603174,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "436",
+            "1016"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8864079469216798,
+          "consistency_score": 0.9029732568469562,
+          "edge_score": 0.602211449248469,
+          "marking_score": 0.8345382403646205,
+          "avg_intensity": 28.965973534971646,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "572",
+            "1012"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8991240940820773,
+          "consistency_score": 0.934772375377336,
+          "edge_score": 0.49570332480818413,
+          "marking_score": 0.8291344246158763,
+          "avg_intensity": 25.723356009070294,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "808",
+            "1008"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8860966608865769,
+          "consistency_score": 0.9486447354502527,
+          "edge_score": 0.5433472835774626,
+          "marking_score": 0.8363112077938568,
+          "avg_intensity": 29.045351473922903,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "976",
+            "1004"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8827708861322306,
+          "consistency_score": 0.9102385740041916,
+          "edge_score": 0.5574021545377045,
+          "marking_score": 0.8259374461749137,
+          "avg_intensity": 29.89342403628118,
+          "is_marked": true
+        }
+      ],
+      [
+        {
+          "center": [
+            "164",
+            "1056"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8675559112533903,
+          "consistency_score": 0.9106358529294962,
+          "edge_score": 0.5213330233279082,
+          "marking_score": 0.8112353161711257,
+          "avg_intensity": 33.77324263038549,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "402",
+            "1052"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8551317691537863,
+          "consistency_score": 0.849392176730954,
+          "edge_score": 0.5881227448918579,
+          "marking_score": 0.8000080865745509,
+          "avg_intensity": 36.9413988657845,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "538",
+            "1050"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.9087368280645591,
+          "consistency_score": 0.9427153261544048,
+          "edge_score": 0.5298077966364412,
+          "marking_score": 0.8431445712058891,
+          "avg_intensity": 23.272108843537413,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "774",
+            "1044"
+          ],
+          "radius": "13",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8621223914896771,
+          "consistency_score": 0.8879367713291665,
+          "edge_score": 0.5658454980309684,
+          "marking_score": 0.8106113267497822,
+          "avg_intensity": 35.15879017013233,
+          "is_marked": true
+        },
+        {
+          "center": [
+            "1010",
+            "1038"
+          ],
+          "radius": "12",
+          "method": "hough",
+          "confidence": 0.8,
+          "darkness_score": 0.8662309368191721,
+          "consistency_score": 0.9182619687573361,
+          "edge_score": 0.5307711384949236,
+          "marking_score": 0.8147482867357716,
+          "avg_intensity": 34.111111111111114,
+          "is_marked": true
+        }
+      ]
+    ],
+    "columns": [
+      166,
+      233,
+      334,
+      367,
+      416,
+      561,
+      784,
+      980
+    ],
+    "most_common_row_length": 5,
+    "structure": "custom_grid"
+  },
+  "visualization_path": "production_results\\result_1095b222-3057-44e9-8fd2-e14b0a681845_Img2.jpeg_detected.jpg"
+}

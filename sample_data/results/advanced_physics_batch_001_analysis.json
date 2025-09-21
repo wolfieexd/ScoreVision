@@ -1,0 +1,62 @@
+{
+  "session_id": "advanced_physics_batch_001",
+  "exam_info": {
+    "subject": "Advanced Physics",
+    "exam_date": "2024-03-15",
+    "total_questions": 50,
+    "total_students": 125,
+    "institution": "Metropolitan High School"
+  },
+  "processing_info": {
+    "started_at": "2024-03-16T09:30:00Z",
+    "completed_at": "2024-03-16T09:42:15Z",
+    "processing_time": "12 minutes 15 seconds",
+    "accuracy_rate": 99.7,
+    "sheets_processed": 125,
+    "errors_detected": 2,
+    "quality_score": 98.4
+  },
+  "statistics": {
+    "average_score": 142.8,
+    "highest_score": 196,
+    "lowest_score": 67,
+    "median_score": 145,
+    "standard_deviation": 28.4,
+    "pass_rate": 84.8,
+    "grade_distribution": {
+      "A": 23,
+      "B": 31,
+      "C": 28,
+      "D": 24,
+      "F": 19
+    }
+  },
+  "question_analysis": {
+    "most_difficult": [29, 39, 47, 50],
+    "easiest": [1, 5, 11, 21],
+    "discrimination_index": {
+      "excellent": 32,
+      "good": 15,
+      "fair": 3,
+      "poor": 0
+    },
+    "category_performance": {
+      "Mechanics and Motion": 78.6,
+      "Thermodynamics": 72.4,
+      "Electromagnetic Theory": 69.8,
+      "Optics and Waves": 74.2,
+      "Modern Physics": 66.1
+    }
+  },
+  "quality_metrics": {
+    "sheet_quality": {
+      "excellent": 118,
+      "good": 5,
+      "fair": 2,
+      "poor": 0
+    },
+    "bubble_detection_confidence": 97.8,
+    "alignment_accuracy": 99.2,
+    "noise_levels": "minimal"
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "student_id": "STU_016",
+  "image_file": "Img11.jpeg",
+  "paper_set": "Set B",
+  "processing_status": "completed",
+  "timestamp": "2025-09-21T15:06:42.123Z",
+  "processing_time_seconds": 3.45,
+  "answer_key": {
+    "Python": {
+      "1": "a", "2": "b", "3": "d", "4": "b", "5": "b", "6": "d", "7": "c", "8": "c", "9": "a", "10": "c",
+      "11": "a", "12": "b", "13": "d", "14": "c", "15": "c", "16": "a", "17": "c", "18": "b", "19": "d", "20": "c"
+    },
+    "EDA": {
+      "21": "a", "22": "a", "23": "b", "24": "a", "25": "b", "26": "a", "27": "b", "28": "b", "29": "c", "30": "c",
+      "31": "b", "32": "c", "33": "b", "34": "c", "35": "a", "36": "a", "37": "a", "38": "b", "39": "b", "40": "a"
+    },
+    "SQL": {
+      "41": "b", "42": "a", "43": "d", "44": "b", "45": "c", "46": "b", "47": "b", "48": "b", "49": "b", "50": "b",
+      "51": "c", "52": "a", "53": "c", "54": "a", "55": "c", "56": "c", "57": "b", "58": "a", "59": "b", "60": "c"
+    },
+    "Power_BI": {
+      "61": "b", "62": "b", "63": "b", "64": "d", "65": "c", "66": "b", "67": "b", "68": "a", "69": "b", "70": "b",
+      "71": "b", "72": "c", "73": "a", "74": "d", "75": "b", "76": "b", "77": "d", "78": "a", "79": "b", "80": "a"
+    },
+    "Statistics": {
+      "81": "b", "82": "c", "83": "b", "84": "a", "85": "c", "86": "b", "87": "b", "88": "a", "89": "b", "90": "c",
+      "91": "c", "92": "d", "93": "b", "94": "b", "95": "b", "96": "c", "97": "c", "98": "b", "99": "b", "100": "c"
+    }
+  },
+  "student_responses": {
+    "Python": {
+      "1": "a", "2": "b", "3": "d", "4": "b", "5": "b", "6": "", "7": "c", "8": "c", "9": "a", "10": "c",
+      "11": "", "12": "b", "13": "d", "14": "c", "15": "c", "16": "a", "17": "", "18": "b", "19": "d", "20": "c"
+    },
+    "EDA": {
+      "21": "", "22": "a", "23": "b", "24": "a", "25": "b", "26": "a", "27": "b", "28": "", "29": "c", "30": "c",
+      "31": "b", "32": "", "33": "b", "34": "c", "35": "a", "36": "a", "37": "a", "38": "", "39": "b", "40": "a"
+    },
+    "SQL": {
+      "41": "b", "42": "", "43": "d", "44": "b", "45": "c", "46": "b", "47": "b", "48": "b", "49": "", "50": "b",
+      "51": "c", "52": "a", "53": "", "54": "a", "55": "c", "56": "c", "57": "b", "58": "", "59": "b", "60": "c"
+    },
+    "Power_BI": {
+      "61": "b", "62": "", "63": "b", "64": "d", "65": "c", "66": "b", "67": "b", "68": "a", "69": "b", "70": "",
+      "71": "b", "72": "c", "73": "", "74": "d", "75": "b", "76": "b", "77": "d", "78": "a", "79": "", "80": "a"
+    },
+    "Statistics": {
+      "81": "", "82": "c", "83": "b", "84": "a", "85": "c", "86": "b", "87": "", "88": "a", "89": "b", "90": "c",
+      "91": "c", "92": "d", "93": "b", "94": "", "95": "b", "96": "c", "97": "c", "98": "b", "99": "", "100": "c"
+    }
+  },
+  "overall_score": {
+    "total_questions": 100,
+    "correct_answers": 62,
+    "wrong_answers": 24,
+    "unattempted": 14,
+    "percentage": 62.0,
+    "grade": "B-"
+  },
+  "subject_scores": {
+    "Python": {
+      "correct": 15,
+      "total": 20,
+      "percentage": 75.0,
+      "attempted": 17,
+      "unattempted": 3
+    },
+    "EDA": {
+      "correct": 14,
+      "total": 20,
+      "percentage": 70.0,
+      "attempted": 16,
+      "unattempted": 4
+    },
+    "SQL": {
+      "correct": 14,
+      "total": 20,
+      "percentage": 70.0,
+      "attempted": 17,
+      "unattempted": 3
+    },
+    "Power_BI": {
+      "correct": 12,
+      "total": 20,
+      "percentage": 60.0,
+      "attempted": 16,
+      "unattempted": 4
+    },
+    "Statistics": {
+      "correct": 7,
+      "total": 20,
+      "percentage": 35.0,
+      "attempted": 16,
+      "unattempted": 4
+    }
+  },
+  "detailed_analysis": {
+    "strong_subjects": ["Python", "EDA", "SQL"],
+    "weak_subjects": ["Statistics"],
+    "improvement_areas": ["Statistics concepts", "Time management for completion"],
+    "unattempted_pattern": "Mostly scattered throughout all subjects, suggesting time pressure rather than specific knowledge gaps"
+  },
+  "quality_metrics": {
+    "detection_confidence": 0.87,
+    "image_quality": "fair",
+    "alignment_score": 0.89,
+    "bubble_clarity": "good",
+    "processing_notes": "Some minor alignment issues but overall good detection accuracy"
+  },
+  "export_info": {
+    "csv_export": "result_STU_016_setB_realistic_20250921_150642.csv",
+    "pdf_report": "detailed_report_STU_016_setB_realistic_20250921_150642.pdf",
+    "generated_at": "2025-09-21T15:06:45.678Z"
+  }
+}

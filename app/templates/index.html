@@ -1,0 +1,639 @@
+{% extends "base.html" %}
+
+{% block title %}ScoreVision Pro - Enterprise OMR Evaluation Platform{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --enterprise-blue: #2c5aa0;
+        --enterprise-dark: #1a365d;
+    }
+    
+    .enterprise-hero {
+        background: linear-gradient(135deg, #1a365d 0%, #2c5aa0 50%, #4facfe 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .enterprise-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+        z-index: 1;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+    
+    .enterprise-badge {
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        display: inline-block;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .hero-title {
+        font-size: 4.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(45deg, #ffffff, #e3f2fd);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.4rem;
+        font-weight: 400;
+        line-height: 1.6;
+        margin-bottom: 3rem;
+        opacity: 0.95;
+    }
+    
+    .enterprise-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+    
+    .metric-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .metric-number {
+        font-size: 2.8rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+    
+    .metric-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .cta-buttons {
+        margin-top: 3rem;
+    }
+    
+    .btn-enterprise {
+        background: rgba(255, 255, 255, 0.95);
+        color: var(--enterprise-dark);
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-enterprise:hover {
+        background: white;
+        color: var(--enterprise-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-enterprise-outline {
+        background: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+    
+    .btn-enterprise-outline:hover {
+        background: white;
+        color: var(--enterprise-dark);
+        border-color: white;
+        transform: translateY(-2px);
+    }
+    
+    .enterprise-features {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 8rem 0;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        margin-top: 4rem;
+    }
+    
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 3rem;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--primary-gradient);
+    }
+    
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+    
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: var(--primary-gradient);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 2rem;
+        font-size: 2rem;
+        color: white;
+    }
+    
+    .feature-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--enterprise-dark);
+        margin-bottom: 1rem;
+    }
+    
+    .feature-description {
+        color: #64748b;
+        line-height: 1.7;
+        font-size: 1rem;
+    }
+    
+    .enterprise-stats {
+        background: var(--enterprise-dark);
+        color: white;
+        padding: 6rem 0;
+        text-align: center;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 3rem;
+        margin-top: 3rem;
+    }
+    
+    .stat-item {
+        padding: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 1rem;
+        background: var(--success-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .section-title {
+        font-size: 3rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: var(--enterprise-dark);
+    }
+    
+    .section-subtitle {
+        font-size: 1.2rem;
+        text-align: center;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto 4rem;
+        line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        .enterprise-metrics {
+            grid-template-columns: 1fr;
+        }
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Enterprise Hero Section -->
+<section class="enterprise-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-10 mx-auto">
+                <div class="hero-content text-center">
+                    <div class="enterprise-badge">
+                        🏆 Enterprise-Grade Solution
+                    </div>
+                    
+                    <h1 class="hero-title">
+                        Advanced OMR Evaluation Platform
+                    </h1>
+                    
+                    <p class="hero-subtitle">
+                        Powering educational excellence with AI-driven optical mark recognition technology. 
+                        Trusted by leading institutions worldwide for precision, speed, and reliability.
+                    </p>
+                    
+                    <div class="enterprise-metrics">
+                        <div class="metric-card">
+                            <span class="metric-number">{{ stats.accuracy_rate }}%</span>
+                            <span class="metric-label">Accuracy Rate</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-number">{{ stats.institutions_served }}+</span>
+                            <span class="metric-label">Institutions</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-number">{{ stats.countries_deployed }}</span>
+                            <span class="metric-label">Countries</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-number">{{ stats.uptime_percentage }}%</span>
+                            <span class="metric-label">Uptime</span>
+                        </div>
+                    </div>
+                    
+                    <div class="cta-buttons">
+                        <a href="{{ url_for('dashboard') }}" class="btn-enterprise">
+                            <i class="fas fa-chart-line me-2"></i>Analytics Dashboard
+                        </a>
+                        <a href="{{ url_for('upload_page') }}" class="btn-enterprise-outline">
+                            <i class="fas fa-upload me-2"></i>Start Processing
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enterprise Features Section -->
+<section class="enterprise-features">
+    <div class="container">
+        <h2 class="section-title">Enterprise Capabilities</h2>
+        <p class="section-subtitle">
+            Comprehensive OMR evaluation suite designed for institutional excellence and operational efficiency
+        </p>
+        
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 class="feature-title">AI-Powered Recognition</h3>
+                <p class="feature-description">
+                    Advanced machine learning algorithms with 99.8% accuracy rate. Intelligent bubble detection with perspective correction and noise reduction capabilities.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">Real-time Analytics</h3>
+                <p class="feature-description">
+                    Comprehensive dashboard with live performance metrics, processing statistics, and detailed reporting for institutional oversight.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="feature-title">Enterprise Security</h3>
+                <p class="feature-description">
+                    Bank-grade encryption, SOC 2 compliance, and GDPR adherence. Multi-factor authentication and role-based access control.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3 class="feature-title">Batch Processing</h3>
+                <p class="feature-description">
+                    High-throughput processing capabilities handling thousands of sheets simultaneously with queue management and progress tracking.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3 class="feature-title">Cloud Infrastructure</h3>
+                <p class="feature-description">
+                    Scalable cloud deployment with automatic scaling, load balancing, and 99.97% uptime guarantee across global data centers.
+                </p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="feature-title">API Integration</h3>
+                <p class="feature-description">
+                    RESTful API with comprehensive documentation for seamless integration with existing educational management systems.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enterprise Statistics -->
+<section class="enterprise-stats">
+    <div class="container">
+        <h2 class="section-title" style="color: white;">Trusted Globally</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.8);">
+            Leading educational institutions worldwide rely on our platform for their assessment needs
+        </p>
+        
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="stat-number">{{ stats.total_evaluations | default('15M+') }}</span>
+                <p>Evaluations Completed</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ stats.processing_capacity | default('50K+') }}</span>
+                <p>Sheets Per Hour</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ stats.institutions_served }}+</span>
+                <p>Institutions Served</p>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">{{ stats.countries_deployed }}</span>
+                <p>Countries Deployed</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enterprise Features List -->
+<section class="enterprise-features">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title text-start">Enterprise-Grade Features</h2>
+                <div class="enterprise-feature-list">
+                    {% for feature in stats.enterprise_features %}
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="feature-check">
+                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.2rem;"></i>
+                        </div>
+                        <span style="font-size: 1.1rem; color: #374151;">{{ feature }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="mt-4">
+                    <h5 style="color: #374151; margin-bottom: 1rem;">Certifications & Compliance</h5>
+                    {% for cert in stats.certifications %}
+                    <span class="badge bg-primary me-2 mb-2 p-2" style="font-size: 0.9rem;">{{ cert }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="enterprise-demo-card" style="background: white; border-radius: 20px; padding: 3rem; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+                    <h4 style="color: #1a365d; margin-bottom: 2rem;">Ready to Transform Your Institution?</h4>
+                    <p style="color: #64748b; margin-bottom: 2rem;">Join leading educational institutions worldwide in leveraging our enterprise OMR evaluation platform.</p>
+                    
+                    <div class="d-grid gap-2">
+                        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg" style="border-radius: 10px;">
+                            <i class="fas fa-chart-bar me-2"></i>View Live Dashboard
+                        </a>
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-outline-primary btn-lg" style="border-radius: 10px;">
+                            <i class="fas fa-upload me-2"></i>Start Free Trial
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-calculator text-warning feature-icon"></i>
+                        <h5 class="card-title font-weight-bold">Advanced Scoring</h5>
+                        <p class="card-text">Flexible scoring engines supporting multiple question types, negative marking, and complex evaluation schemes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-chart-analytics text-danger feature-icon"></i>
+                        <h5 class="card-title font-weight-bold">Analytics Dashboard</h5>
+                        <p class="card-text">Comprehensive reporting with statistical analysis, performance metrics, and exportable detailed reports.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card feature-card">
+                    <div class="card-body text-center p-4">
+                        <i class="fas fa-shield-virus text-secondary feature-icon"></i>
+                        <h5 class="card-title font-weight-bold">Quality Assurance</h5>
+                        <p class="card-text">Multi-layer validation system ensuring 100% accuracy with automated quality checks and manual review options.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center section-title">Processing Workflow</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card feature-card border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <span class="badge bg-primary rounded-pill px-3 py-2 mb-3" style="font-size: 1.2rem;">01</span>
+                        </div>
+                        <i class="fas fa-file-upload text-primary mb-3" style="font-size: 2.5rem;"></i>
+                        <h6 class="card-title font-weight-bold">Upload Answer Sheets</h6>
+                        <p class="card-text small">Secure upload of scanned OMR sheets with automatic quality assessment</p>
+                        <a href="{{ url_for('upload_page') }}" class="btn btn-outline-primary btn-sm">Upload Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card feature-card border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <span class="badge bg-success rounded-pill px-3 py-2 mb-3" style="font-size: 1.2rem;">02</span>
+                        </div>
+                        <i class="fas fa-key text-success mb-3" style="font-size: 2.5rem;"></i>
+                        <h6 class="card-title font-weight-bold">Configure Answer Keys</h6>
+                        <p class="card-text small">Import answer keys in multiple formats with validation and preview</p>
+                        <a href="{{ url_for('answer_key_page') }}" class="btn btn-outline-success btn-sm">Manage Keys</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card feature-card border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <span class="badge bg-info rounded-pill px-3 py-2 mb-3" style="font-size: 1.2rem;">03</span>
+                        </div>
+                        <i class="fas fa-cogs text-info mb-3" style="font-size: 2.5rem;"></i>
+                        <h6 class="card-title font-weight-bold">Automated Processing</h6>
+                        <p class="card-text small">AI-powered evaluation with real-time progress monitoring</p>
+                        <a href="{{ url_for('batch_page') }}" class="btn btn-outline-info btn-sm">Process Batch</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3 mb-4">
+                <div class="card feature-card border-0">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <span class="badge bg-warning rounded-pill px-3 py-2 mb-3" style="font-size: 1.2rem;">04</span>
+                        </div>
+                        <i class="fas fa-file-export text-warning mb-3" style="font-size: 2.5rem;"></i>
+                        <h6 class="card-title font-weight-bold">Export & Analytics</h6>
+                        <p class="card-text small">Generate comprehensive reports with detailed analytics</p>
+                        <a href="{{ url_for('results_page') }}" class="btn btn-outline-warning btn-sm">View Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4">
+                <h3 class="font-weight-bold mb-4">Why Choose Our OMR Platform?</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
+                            <span class="font-weight-bold">Enterprise Security</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
+                            <span class="font-weight-bold">Scalable Architecture</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
+                            <span class="font-weight-bold">24/7 Support</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success me-3" style="font-size: 1.5rem;"></i>
+                            <span class="font-weight-bold">API Integration</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4 text-muted">Trusted by educational institutions worldwide for accurate, efficient, and reliable OMR evaluation. Our platform handles millions of answer sheets with consistent precision.</p>
+                <div class="mt-4">
+                    <a href="{{ url_for('upload_page') }}" class="btn btn-custom me-3">Get Started</a>
+                    <a href="{{ url_for('validation_page') }}" class="btn btn-outline-secondary">Quality Check</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <div class="card border-0 bg-primary text-white text-center p-3">
+                            <h4 class="mb-1">150+</h4>
+                            <small>Countries Served</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="card border-0 bg-success text-white text-center p-3">
+                            <h4 class="mb-1">5M+</h4>
+                            <small>Sheets Monthly</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="card border-0 bg-info text-white text-center p-3">
+                            <h4 class="mb-1">99.9%</h4>
+                            <small>System Uptime</small>
+                        </div>
+                    </div>
+                    <div class="col-6 mb-3">
+                        <div class="card border-0 bg-warning text-white text-center p-3">
+                            <h4 class="mb-1">&lt;2s</h4>
+                            <small>Processing Time</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
